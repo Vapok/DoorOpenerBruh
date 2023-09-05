@@ -1,0 +1,9 @@
+{
+  "name": "DoorOpenerBruh",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/Vapok/DoorOpenerBruh",
+  "description": "",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.2105"
+  ]
+}
