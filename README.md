@@ -1,5 +1,13 @@
 # DoorOpenerBruh by Vapok
 
+DoorOpenerBruh is a simple automatic door open and closer.
+
+Contains optional settings for automating Burial Chamber doors.
+
+When enabled, walking up to a door and it will open.  Walk away, and it will close.
+
+Super Simple!
+
 
 ### Mod Author Details
 

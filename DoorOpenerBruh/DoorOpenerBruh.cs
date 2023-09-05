@@ -21,7 +21,7 @@ namespace DoorOpenerBruh
         //Module Constants
         private const string _pluginId = "vapok.mods.DoorOpenerBruh";
         private const string _displayName = "DoorOpenerBruh";
-        private const string _version = "0.0.0";
+        private const string _version = "1.0.0";
         
         //Interface Properties
         public string PluginId => _pluginId;
@@ -31,7 +31,7 @@ namespace DoorOpenerBruh
         
         //Class Properties
         public static ILogIt Log => _log;
-        public static bool ValheimAwake = false;
+        public static bool ValheimAwake;
         public static bool PerformYardSale = false;
         public static Waiting Waiter;
         
