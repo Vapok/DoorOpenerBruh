@@ -1,4 +1,5 @@
-﻿using DoorOpenerBruh.Configuration;
+﻿using System;
+using DoorOpenerBruh.Configuration;
 using UnityEngine;
 
 namespace DoorOpenerBruh.Components;
