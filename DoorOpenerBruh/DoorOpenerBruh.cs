@@ -21,7 +21,7 @@ namespace DoorOpenerBruh
         //Module Constants
         private const string _pluginId = "vapok.mods.DoorOpenerBruh";
         private const string _displayName = "DoorOpenerBruh";
-        private const string _version = "1.0.0";
+        private const string _version = "1.0.1";
         
         //Interface Properties
         public string PluginId => _pluginId;
@@ -32,7 +32,6 @@ namespace DoorOpenerBruh
         //Class Properties
         public static ILogIt Log => _log;
         public static bool ValheimAwake;
-        public static bool PerformYardSale = false;
         public static Waiting Waiter;
         
         //Class Privates
@@ -52,15 +51,13 @@ namespace DoorOpenerBruh
             Waiter = new Waiting();
             
             //Initialize Managers
-            Initializer.LoadManagers();
+            Initializer.LoadManagers(enableLocalizationManager: true);
 
             //Register Configuration Settings
             _config = new ConfigRegistry(_instance);
 
             //Register Logger
             LogManager.Init(PluginId,out _log);
-
-            PrefabManager.Initalized = true;
 
             Localizer.Waiter.StatusChanged += InitializeModule;
             
@@ -71,12 +68,6 @@ namespace DoorOpenerBruh
             //???
 
             //Profit
-        }
-        
-        private void Update()
-        {
-            if (!Player.m_localPlayer || !ZNetScene.instance)
-                return;
         }
 
         public void InitializeModule(object send, EventArgs args)
@@ -89,10 +80,7 @@ namespace DoorOpenerBruh
             effectsFactory.RegisterEffects();
             
             //Register Assets
-            
-            //Enable BoneReorder
-            BoneReorder.ApplyOnEquipmentChanged(Info.Metadata.GUID);
-            
+           
             ConfigRegistry.Waiter.ConfigurationComplete(true);
 
             ValheimAwake = true;

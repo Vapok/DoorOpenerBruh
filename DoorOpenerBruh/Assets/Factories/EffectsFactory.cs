@@ -8,12 +8,7 @@ namespace DoorOpenerBruh.Assets.Factories;
 
 public enum DoorOpenerBruhEffects
 {
-    FeatherFall,
-    ColdResistance,
-    Demister,
-    WaterResistance,
-    FrostResistance,
-    TrollArmor
+
 }
 public class EffectsFactory : FactoryBase
 {
