@@ -1,8 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DoorOpenerBruh.Components;
 
+public enum AutomationMechanic
+{
+    OnlyOpenSelfmadeDoors,
+    OnlyOpenAllPlayerMadeDoors,
+    OpenAllDoors,
+    DoNotOpenAutomatically
+}
 public class DoorOpener : MonoBehaviour
 {
     public static DoorOpener Instance;
