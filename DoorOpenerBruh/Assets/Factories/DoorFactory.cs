@@ -14,7 +14,7 @@ public class DoorFactory : FactoryBase
     
     public DoorFactory(ILogIt logger, ConfigSyncBase configs) : base(logger, configs)
     {
-        _doorPieces.Add("dungeon_forestcrypt_door",new DungeonForestCryptDoor("dungeon_forestcrypt_door", "$piece_wooddoor", "Dungeon: Black Forest Crypt Door"));
+        _doorPieces.Add("dungeon_forestcrypt_door",new DungeonForestCryptDoor("dungeon_forestcrypt_door", "$piece_wooddoor", "Dungeon: Burial Chamber Door"));
         _doorPieces.Add("dungeon_queen_door",new DungeonQueenDoor("dungeon_queen_door", "$piece_queendoor", "World: Mistlands Queen Door"));
         _doorPieces.Add("dvergrtown_secretdoor",new DvergrTownSecretDoor("dvergrtown_secretdoor", "$piece_secretdoor", "Dungeon: Dvergr Town Secret Door"));
         _doorPieces.Add("dvergrtown_slidingdoor",new DvergrTownSlidingDoor("dvergrtown_slidingdoor", "$piece_dv_gate", "Dungeon: Dvergr Town Sliding Door"));

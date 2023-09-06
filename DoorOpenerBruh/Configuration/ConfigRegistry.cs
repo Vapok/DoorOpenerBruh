@@ -33,16 +33,6 @@ namespace DoorOpenerBruh.Configuration
                 new ConfigDescription("If true, will automatically open doors.",
                     null, 
                     new ConfigurationManagerAttributes { Category = "Synced Settings", Order = 1 }));
-
-            OpenCryptDoors = SyncedConfig("Synced Settings", "Open Burial Chamber Doors", false,
-                new ConfigDescription("If true, will auto open doors when in crypts.",
-                    null, 
-                    new ConfigurationManagerAttributes { Category = "Synced Settings", Order = 2 }));
-
-            OpenSunkenCryptDoors = SyncedConfig("Synced Settings", "Open Sunken Crypt Gates", false,
-                new ConfigDescription("If true, will auto open doors when in crypts.",
-                    null, 
-                    new ConfigurationManagerAttributes { Category = "Synced Settings", Order = 3 }));
         }
     }
     

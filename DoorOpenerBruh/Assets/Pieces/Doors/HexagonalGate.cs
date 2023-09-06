@@ -18,6 +18,6 @@ public class HexagonalGate : DoorPiece
 
     internal sealed override void RegisterConfigSettings()
     {
-        RegisterAutomationMechanic(Components.AutomationMechanic.OnlyOpenAllPlayerMadeDoors);
+        RegisterAutomationMechanic(Components.AutomationMechanic.OpenAllDoors);
     }
 }
