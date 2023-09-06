@@ -1,4 +1,4 @@
-# v1.1.0 - Door Management and Config
+# v1.1.1 - Door Management and Config
 * Introducing Config Settings for Everydoor in the Game.
   * Auto Close/Open settings based on type of Door
   * Auto Close/Open Methods based on Self-made Door, or Player Only made Doors.

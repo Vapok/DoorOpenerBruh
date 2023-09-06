@@ -9,8 +9,6 @@ namespace DoorOpenerBruh.Configuration
     public class ConfigRegistry : ConfigSyncBase
     {
         //Configuration Entry Privates
-        internal static ConfigEntry<bool> OpenCryptDoors { get; private set;}
-        internal static ConfigEntry<bool> OpenSunkenCryptDoors { get; private set;}
         internal static ConfigEntry<bool> Enabled { get; private set;}
         
         public static Waiting Waiter;
