@@ -11,8 +11,7 @@ public class SunkenCryptIronGate : DoorPiece
 
     public override bool DoorAutomationEnabled(Door trackedDoor)
     {
-        var enabled = ComputeAutomation(trackedDoor, true) && 
-                      ConfigRegistry.OpenSunkenCryptDoors.Value;
+        var enabled = ComputeAutomation(trackedDoor, true);
 
         return enabled;
     }
