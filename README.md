@@ -6,6 +6,14 @@ Contains optional settings for automating Burial Chamber doors.
 
 When enabled, walking up to a door and it will open.  Walk away, and it will close.
 
+## Features:
+* Config Settings for Everydoor in the Game.
+* Auto Close/Open settings based on type of Door
+* Auto Close/Open Methods based on Self-made Door, or Player Only made Doors.
+* Auto Close/Open Doors with Keys (if player has them)
+* Configuration is ServerSync-able
+* Respects Wards and Private Access Areas
+
 Super Simple!
 
 
