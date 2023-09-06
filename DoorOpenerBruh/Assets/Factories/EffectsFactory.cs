@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DoorOpenerBruh.Assets.Effects;
 using Vapok.Common.Abstractions;
 using Vapok.Common.Managers.Configuration;

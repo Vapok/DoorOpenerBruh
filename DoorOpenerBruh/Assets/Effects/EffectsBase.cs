@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using BepInEx.Configuration;
-using DoorOpenerBruh.Configuration;
+﻿using BepInEx.Configuration;
 using Vapok.Common.Managers.Configuration;
 using Vapok.Common.Shared;
 

@@ -83,9 +83,26 @@
     <ItemGroup>
         <Compile Include="Assets\Effects\EffectsBase.cs" />
         <Compile Include="Assets\Factories\AssetFactory.cs" />
+        <Compile Include="Assets\Factories\DoorFactory.cs" />
         <Compile Include="Assets\Factories\EffectsFactory.cs" />
         <Compile Include="Assets\Factories\FactoryBase.cs" />
         <Compile Include="Assets\Items\AssetItem.cs" />
+        <Compile Include="Assets\Pieces\DoorPiece.cs" />
+        <Compile Include="Assets\Pieces\Doors\DarkwoodGate.cs" />
+        <Compile Include="Assets\Pieces\Doors\DungeonForestCryptDoor.cs" />
+        <Compile Include="Assets\Pieces\Doors\DungeonQueenDoor.cs" />
+        <Compile Include="Assets\Pieces\Doors\DungeonSunkenCryptIronGate.cs" />
+        <Compile Include="Assets\Pieces\Doors\DvergrTownSecretDoor.cs" />
+        <Compile Include="Assets\Pieces\Doors\DvergrTownSlidingDoor.cs" />
+        <Compile Include="Assets\Pieces\Doors\DvergrWoodDoor.cs" />
+        <Compile Include="Assets\Pieces\Doors\HexagonalGate.cs" />
+        <Compile Include="Assets\Pieces\Doors\IronGrate.cs" />
+        <Compile Include="Assets\Pieces\Doors\MountainWoodGate.cs" />
+        <Compile Include="Assets\Pieces\Doors\OtherDoors.cs" />
+        <Compile Include="Assets\Pieces\Doors\SunkenCryptIronGate.cs" />
+        <Compile Include="Assets\Pieces\Doors\WoodDoor.cs" />
+        <Compile Include="Assets\Pieces\Doors\WoodGate.cs" />
+        <Compile Include="Assets\Pieces\IDoorPiece.cs" />
         <Compile Include="Components\DoorOpener.cs" />
         <Compile Include="Components\DoorStatus.cs" />
         <Compile Include="Configuration\ConfigRegistry.cs" />

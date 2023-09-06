@@ -1,6 +1,5 @@
 ﻿using System;
 using BepInEx.Configuration;
-using UnityEngine;
 using Vapok.Common.Abstractions;
 using Vapok.Common.Managers.Configuration;
 using Vapok.Common.Shared;
@@ -11,6 +10,7 @@ namespace DoorOpenerBruh.Configuration
     {
         //Configuration Entry Privates
         internal static ConfigEntry<bool> OpenCryptDoors { get; private set;}
+        internal static ConfigEntry<bool> OpenSunkenCryptDoors { get; private set;}
         internal static ConfigEntry<bool> Enabled { get; private set;}
         
         public static Waiting Waiter;
@@ -33,11 +33,6 @@ namespace DoorOpenerBruh.Configuration
                 new ConfigDescription("If true, will automatically open doors.",
                     null, 
                     new ConfigurationManagerAttributes { Category = "Synced Settings", Order = 1 }));
-
-            OpenCryptDoors = SyncedConfig("Synced Settings", "Open Crypt Doors", false,
-                new ConfigDescription("If true, will auto open doors when in crypts.",
-                    null, 
-                    new ConfigurationManagerAttributes { Category = "Synced Settings", Order = 2 }));
         }
     }
     

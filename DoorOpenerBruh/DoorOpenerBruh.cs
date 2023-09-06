@@ -3,7 +3,6 @@ using System;
 using System.Reflection;
 using BepInEx;
 using HarmonyLib;
-using ItemManager;
 using JetBrains.Annotations;
 using DoorOpenerBruh.Assets.Factories;
 using DoorOpenerBruh.Configuration;
@@ -21,7 +20,7 @@ namespace DoorOpenerBruh
         //Module Constants
         private const string _pluginId = "vapok.mods.DoorOpenerBruh";
         private const string _displayName = "DoorOpenerBruh";
-        private const string _version = "1.0.1";
+        private const string _version = "1.1.0";
         
         //Interface Properties
         public string PluginId => _pluginId;
@@ -36,6 +35,7 @@ namespace DoorOpenerBruh
         
         //Class Privates
         private static DoorOpenerBruh _instance;
+        private DoorFactory _doorFactory;
         private static ConfigSyncBase _config;
         private static ILogIt _log;
         private Harmony _harmony;
@@ -80,7 +80,8 @@ namespace DoorOpenerBruh
             effectsFactory.RegisterEffects();
             
             //Register Assets
-           
+            _doorFactory = new DoorFactory(_log, _config);
+            
             ConfigRegistry.Waiter.ConfigurationComplete(true);
 
             ValheimAwake = true;

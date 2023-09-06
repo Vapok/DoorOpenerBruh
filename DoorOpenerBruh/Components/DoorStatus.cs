@@ -1,5 +1,5 @@
 ﻿using System;
-using DoorOpenerBruh.Configuration;
+using DoorOpenerBruh.Assets.Factories;
 using UnityEngine;
 
 namespace DoorOpenerBruh.Components;
@@ -7,42 +7,67 @@ namespace DoorOpenerBruh.Components;
 public class DoorStatus : MonoBehaviour
 {
     private Door _trackedDoor;
-
+    private Piece _piece;
+    private bool _enabled;
     private bool _inRange;
     private bool _autoOpened;
+    private bool _isGhost;
     private int _status;
-    private float _timeRemaining; 
+    private float _timeRemaining;
+    private bool _started;
+
+    public bool IsGhost => _isGhost;
 
     private void Awake()
     {
         _trackedDoor = gameObject.GetComponent<Door>();
-        DoorOpener.Instance.AddDoor(_trackedDoor);
-        InvokeRepeating(nameof(UpdateState),0.0f,0.1f);
+        _piece = gameObject.GetComponent<Piece>();
+        
+        InvokeRepeating(nameof(UpdateState),0.0f,0.2f);
     }
 
     private void Start()
     {
-        UpdateState();
+        _isGhost = _trackedDoor.gameObject.layer == Piece.s_ghostLayer;
+            
+        if (_isGhost)
+        {
+            CancelInvoke(nameof(UpdateState));
+            enabled = false;
+            return;
+        }
+        
+        DoorOpenerBruh.Log.Debug($"Door Name: {_trackedDoor.gameObject.name} - Env: {EnvMan.instance.m_forceEnv} - Creator: {_trackedDoor.m_nview.GetZDO().GetLong(ZDOVars.s_creator)} ");
+        _started = true;
+    }
+
+    private void OnEnable()
+    {
+        DoorOpener.Instance.AddDoor(_trackedDoor);
+    }
+
+    private void OnDisable()
+    {
+        DoorOpener.Instance.RemoveDoor(_trackedDoor);
     }
 
     private void UpdateState()
     {
-        if (!IsEnabled())
-            return;
-
         if (_trackedDoor.m_nview.GetZDO().IsValid())
             _status = _trackedDoor.m_nview.GetZDO().GetInt(ZDOVars.s_state);
     }
     
     private void Update()
     {
+        if (!_started) return;
+        
         _timeRemaining -= Time.deltaTime;
         if (_timeRemaining > 0f)
             return;
         
-        _timeRemaining = 1f/32;
+        _timeRemaining = 0.02f;
         
-        if (!DoorOpener.Instance.Enabled || !IsEnabled())
+        if (!DoorOpener.Instance.Enabled)
             return;
 
         CheckPlayerPositionForDoors();
@@ -50,28 +75,26 @@ public class DoorStatus : MonoBehaviour
 
     private bool IsEnabled()
     {
-        var enabled = ConfigRegistry.Enabled.Value &&
-                      (!EnvMan.instance.m_forceEnv.Contains("Crypt") || ConfigRegistry.OpenCryptDoors.Value) &&
-                      DoorOpener.Instance.Bruh is not null &&
-                      _trackedDoor.m_keyItem is null &&
-                      _trackedDoor.m_nview.HasOwner() &&
-                      _trackedDoor.CanInteract();
-        
-        return enabled;
+        if (!DoorFactory.DoorPieces.TryGetValue(_trackedDoor.gameObject.name.Replace("(Clone)",String.Empty),out var doorPiece))
+            doorPiece = DoorFactory.DoorPieces["other"];
+
+        _enabled = doorPiece.DoorAutomationEnabled(_trackedDoor);
+        return _enabled;
     }
 
     private void CheckPlayerPositionForDoors()
     {
         var player = DoorOpener.Instance.Bruh;
         
-        if (player.IsDead())
+        if (player is null || player.IsDead())
             return;
         
         _inRange = PlayersInRange(player, _inRange, out var previousInRange);
 
         if (_inRange)
         {
-            if (_status == 0)
+            _enabled = IsEnabled();
+            if (_enabled && ((_status == 0 && !_trackedDoor.m_invertedOpenClosedText)||(_status != 0 && _trackedDoor.m_invertedOpenClosedText)))
             {
                 if (!_autoOpened)
                 {
@@ -86,9 +109,9 @@ public class DoorStatus : MonoBehaviour
         }
         else
         {
-            if (_autoOpened)
+            if (_enabled && _autoOpened)
             {
-                SetState(0);
+                SetState(_trackedDoor.m_invertedOpenClosedText ? 1 :0);
                 _autoOpened = false;
             }
         }
@@ -96,8 +119,6 @@ public class DoorStatus : MonoBehaviour
 
     private bool PlayersInRange(Player player, bool currentInRange, out bool previouslyInRange)
     {
-        var allPlayers = ZNet.instance.m_players;
-
         var inRange = false;
         
         previouslyInRange = currentInRange;

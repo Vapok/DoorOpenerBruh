@@ -11,13 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module Files", "Module File
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Translations", "Translations", "{453B1EE0-9980-4B66-93B3-2DDBD21FEE03}"
-	ProjectSection(SolutionItems) = preProject
-		Translations\DoorOpenerBruh.French.json = Translations\DoorOpenerBruh.French.json
-		Translations\DoorOpenerBruh.German.json = Translations\DoorOpenerBruh.German.json
-		Translations\DoorOpenerBruh.Norwegian.json = Translations\DoorOpenerBruh.Norwegian.json
-		Translations\DoorOpenerBruh.Russian.json = Translations\DoorOpenerBruh.Russian.json
-		Translations\DoorOpenerBruh.Korean.json = Translations\DoorOpenerBruh.Korean.json
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
