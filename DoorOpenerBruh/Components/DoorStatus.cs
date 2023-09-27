@@ -17,6 +17,8 @@ public class DoorStatus : MonoBehaviour
     private bool _started;
 
     public bool IsGhost => _isGhost;
+    public Door TrackedDoor => _trackedDoor;
+    public bool Enabled => _enabled;
 
     private void Awake()
     {
@@ -36,8 +38,6 @@ public class DoorStatus : MonoBehaviour
             enabled = false;
             return;
         }
-        
-        DoorOpenerBruh.Log.Debug($"Door Name: {_trackedDoor.gameObject.name} - Env: {EnvMan.instance.m_forceEnv} - Creator: {_trackedDoor.m_nview.GetZDO().GetLong(ZDOVars.s_creator)} ");
         _started = true;
     }
 
@@ -77,8 +77,8 @@ public class DoorStatus : MonoBehaviour
     {
         if (!DoorFactory.DoorPieces.TryGetValue(_trackedDoor.gameObject.name.Replace("(Clone)",String.Empty),out var doorPiece))
             doorPiece = DoorFactory.DoorPieces["other"];
-
-        _enabled = doorPiece.DoorAutomationEnabled(_trackedDoor);
+        
+        _enabled = doorPiece.DoorAutomationEnabled(this);
         return _enabled;
     }
 

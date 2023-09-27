@@ -1,4 +1,5 @@
-﻿using DoorOpenerBruh.Configuration;
+﻿using DoorOpenerBruh.Components;
+using DoorOpenerBruh.Configuration;
 
 namespace DoorOpenerBruh.Assets.Pieces.Doors;
 
@@ -9,7 +10,7 @@ public class WoodDoor : DoorPiece
         RegisterConfigSettings();
     }
 
-    public override bool DoorAutomationEnabled(Door trackedDoor)
+    public override bool DoorAutomationEnabled(DoorStatus trackedDoor)
     {
         var enabled = ComputeAutomation(trackedDoor);
 

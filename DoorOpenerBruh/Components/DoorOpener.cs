@@ -15,9 +15,11 @@ public class DoorOpener : MonoBehaviour
 
     public Player Bruh;
     public bool Enabled;
+    public bool PlayerSet => _playerSet;
 
     private int _doorCount;
-    private float _timeRemaining; 
+    private bool _needsUpdating = true;
+    private bool _playerSet;
     
     private void Awake()
     {
@@ -26,16 +28,20 @@ public class DoorOpener : MonoBehaviour
 
     private void Update()
     {
-        _timeRemaining -= Time.deltaTime;
-        if (_timeRemaining > 0f)
+        if (!_needsUpdating)
             return;
-        
-        _timeRemaining = 5f;
 
-        if (Player.m_localPlayer != null)
-            Bruh = Player.m_localPlayer;
+        if (!_playerSet)
+            if (Player.m_localPlayer != null)
+            {
+                Bruh = Player.m_localPlayer;
+                _playerSet = true;
+            }
+            else
+                return;
         
         DoorOpenerBruh.Log.Debug($"Tracking {_doorCount} doors.");
+        _needsUpdating = false;
     }
 
     private void OnEnable()
@@ -51,9 +57,11 @@ public class DoorOpener : MonoBehaviour
     public void AddDoor(Door trackedDoor)
     {
         _doorCount++;
+        _needsUpdating = true;
     }
     public void RemoveDoor(Door trackedDoor)
     {
         _doorCount--;
+        _needsUpdating = true;
     }
 }
