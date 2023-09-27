@@ -6,5 +6,5 @@ public interface IDoorPiece
 {
     string PrefabName { get; }
     string PieceName { get; }
-    bool DoorAutomationEnabled(Door trackedDoor);
+    bool DoorAutomationEnabled(DoorStatus trackedDoor);
 }

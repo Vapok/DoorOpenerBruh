@@ -25,7 +25,7 @@ public abstract class DoorPiece : IDoorPiece
         _configSection = string.IsNullOrEmpty(configSection) ? $"Door: {pieceName}" : configSection;
     }
 
-    public abstract bool DoorAutomationEnabled(Door trackedDoor);
+    public abstract bool DoorAutomationEnabled(DoorStatus trackedDoor);
     
     internal abstract void RegisterConfigSettings();
     
@@ -45,7 +45,7 @@ public abstract class DoorPiece : IDoorPiece
                 new ConfigurationManagerAttributes { Category = _configSection, Order = 2 }));
     }
 
-    internal bool ComputeAutomation(Door trackedDoor, bool keyDefined = false)
+    internal bool ComputeAutomation(DoorStatus trackedDoor, bool keyDefined = false)
     {
         var computeResult = false;
         switch (AutomationMechanic.Value)
@@ -66,49 +66,46 @@ public abstract class DoorPiece : IDoorPiece
         return computeResult;
     }
 
-    private bool IsPlayerMadeDoor(Door trackedDoor)
+    private bool IsPlayerMadeDoor(DoorStatus trackedDoor)
     {
-        if (trackedDoor.m_nview.GetZDO().IsValid())
-            return trackedDoor.m_nview.GetZDO().GetLong(ZDOVars.s_creator) != 0L;
+        if (trackedDoor.TrackedDoor.m_nview.GetZDO().IsValid())
+            return trackedDoor.TrackedDoor.m_nview.GetZDO().GetLong(ZDOVars.s_creator) != 0L;
 
         return false;
     }
     
-    private bool IsSelfMadeDoor(Door trackedDoor)
+    private bool IsSelfMadeDoor(DoorStatus trackedDoor)
     {
         var player = DoorOpener.Instance.Bruh;
 
-        if (trackedDoor.m_nview.GetZDO().IsValid())
-            return trackedDoor.m_nview.GetZDO().GetLong(ZDOVars.s_creator) == player.GetPlayerID();
+        if (trackedDoor.TrackedDoor.m_nview.GetZDO().IsValid())
+            return trackedDoor.TrackedDoor.m_nview.GetZDO().GetLong(ZDOVars.s_creator) == player.GetPlayerID();
 
         return false;
     }
 
-    private bool DefaultDoorEnablement(Door trackedDoor, bool keyDefined)
+    private bool DefaultDoorEnablement(DoorStatus trackedDoor, bool keyDefined)
     {
-        var status = trackedDoor.gameObject.GetComponent<DoorStatus>();
-        
-        var enabled = status is not null &&
-                      status.isActiveAndEnabled &&
-                      !status.IsGhost &&
+        var enabled = trackedDoor.isActiveAndEnabled &&
+                      !trackedDoor.IsGhost &&
                       ConfigRegistry.Enabled.Value &&
-                      DoorOpener.Instance.Bruh is not null &&
+                      DoorOpener.Instance.PlayerSet &&
                       DetermineCheckForKey(trackedDoor, keyDefined) &&
-                      trackedDoor.CanInteract();
+                      trackedDoor.TrackedDoor.CanInteract();
 
         return enabled;
     }
 
-    private bool DetermineCheckForKey(Door trackedDoor, bool keyDefined)
+    private bool DetermineCheckForKey(DoorStatus trackedDoor, bool keyDefined)
     {
-        var enabled = trackedDoor.m_keyItem is null;
+        var enabled = trackedDoor.TrackedDoor.m_keyItem is null;
 
         if (!keyDefined) return enabled;
         if (CheckForKey.Value)
         {
             enabled = true;
-            if (trackedDoor.m_keyItem is not null)
-                enabled = trackedDoor.HaveKey(DoorOpener.Instance.Bruh);
+            if (trackedDoor.TrackedDoor.m_keyItem is not null)
+                enabled = trackedDoor.TrackedDoor.HaveKey(DoorOpener.Instance.Bruh);
         }
 
         return enabled;
