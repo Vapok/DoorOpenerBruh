@@ -1,3 +1,7 @@
+# v1.1.4 - Updates for 0.217.28
+* Updating for Valheim 0.217.28
+* Fixed issue where doors don't open after death.
+
 # v1.1.3 - Updates for 0.217.24
 * Updating for Valheim 0.217.24
 

@@ -112,6 +112,7 @@
         <Compile Include="Extensions\DoorExtensions.cs" />
         <Compile Include="Patches\Door.cs" />
         <Compile Include="Patches\FejdStartup.cs" />
+        <Compile Include="Patches\Player.cs" />
         <Compile Include="Patches\ZNetScene.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="DoorOpenerBruh.cs" />

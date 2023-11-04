@@ -20,7 +20,7 @@ namespace DoorOpenerBruh
         //Module Constants
         private const string _pluginId = "vapok.mods.DoorOpenerBruh";
         private const string _displayName = "DoorOpenerBruh";
-        private const string _version = "1.1.3";
+        private const string _version = "1.1.4";
         
         //Interface Properties
         public string PluginId => _pluginId;
@@ -90,7 +90,6 @@ namespace DoorOpenerBruh
         private void OnDestroy()
         {
             _instance = null;
-            _harmony?.UnpatchSelf();
         }
 
         public class Waiting
