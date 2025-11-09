@@ -9,7 +9,7 @@ namespace DoorOpenerBruh.Configuration
     public class ConfigRegistry : ConfigSyncBase
     {
         //Configuration Entry Privates
-        internal static ConfigEntry<bool> Enabled { get; private set;}
+        internal static ConfigEntry<bool> Enabled;
         
         public static Waiting Waiter;
 
@@ -27,10 +27,10 @@ namespace DoorOpenerBruh.Configuration
                 return;
             
             //User Configs
-            Enabled = SyncedConfig("Synced Settings", "Enable Auto Door", false,
+             SyncedConfig("Synced Settings", "Enable Auto Door", true,
                 new ConfigDescription("If true, will automatically open doors.",
                     null, 
-                    new ConfigurationManagerAttributes { Category = "Synced Settings", Order = 1 }));
+                    new ConfigurationManagerAttributes { Category = "Synced Settings", Order = 1 }),ref Enabled);
         }
     }
     

@@ -7,7 +7,7 @@ namespace DoorOpenerBruh.Assets.Effects;
 public abstract class EffectsBase
 {
     public string EffectName => _effectName;
-    public ConfigEntry<bool> EnabledEffect { get; private set;}
+    public ConfigEntry<bool> EnabledEffect;
 
     private string _configSection;
     private string _effectName;
@@ -25,10 +25,10 @@ public abstract class EffectsBase
     public void RegisterEffectConfiguration()
     {
         
-        EnabledEffect = ConfigSyncBase.SyncedConfig(_configSection, "Effect Enabled", true,
+        ConfigSyncBase.SyncedConfig(_configSection, "Effect Enabled", true,
             new ConfigDescription(_description,
                 null,
-                new ConfigurationManagerAttributes { Order = 1 }));
+                new ConfigurationManagerAttributes { Order = 1 }),ref EnabledEffect);
         
         //Waiting For Startup
         //ConfigRegistry.Waiter.StatusChanged += ;

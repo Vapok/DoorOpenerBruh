@@ -6,6 +6,8 @@ using HarmonyLib;
 using JetBrains.Annotations;
 using DoorOpenerBruh.Assets.Factories;
 using DoorOpenerBruh.Configuration;
+using Jotunn.Managers;
+using Jotunn.Utils;
 using Vapok.Common.Abstractions;
 using Vapok.Common.Managers;
 using Vapok.Common.Managers.Configuration;
@@ -15,12 +17,16 @@ using Vapok.Common.Tools;
 namespace DoorOpenerBruh
 {
     [BepInPlugin(_pluginId, _displayName, _version)]
+    [BepInDependency(Jotunn.Main.ModGuid)]
+    [BepInDependency("com.ValheimModding.YamlDotNetDetector")]
+    
+    [SynchronizationMode(AdminOnlyStrictness.IfOnServer)]
     public class DoorOpenerBruh : BaseUnityPlugin, IPluginInfo
     {
         //Module Constants
         private const string _pluginId = "vapok.mods.DoorOpenerBruh";
         private const string _displayName = "DoorOpenerBruh";
-        private const string _version = "1.1.1";
+        private const string _version = "1.2.2";
         
         //Interface Properties
         public string PluginId => _pluginId;
@@ -50,14 +56,17 @@ namespace DoorOpenerBruh
             //Waiting For Startup
             Waiter = new Waiting();
             
-            //Initialize Managers
-            Initializer.LoadManagers(enableLocalizationManager: true);
-
-            //Register Configuration Settings
-            _config = new ConfigRegistry(_instance);
+            //Jotunn Localization
+            var localization = LocalizationManager.Instance.GetLocalization();
 
             //Register Logger
             LogManager.Init(PluginId,out _log);
+
+            //Initialize Managers
+            Initializer.LoadManagers(localization);
+            
+            //Register Configuration Settings
+            _config = new ConfigRegistry(_instance);
 
             Localizer.Waiter.StatusChanged += InitializeModule;
             
@@ -90,7 +99,6 @@ namespace DoorOpenerBruh
         private void OnDestroy()
         {
             _instance = null;
-            _harmony?.UnpatchSelf();
         }
 
         public class Waiting

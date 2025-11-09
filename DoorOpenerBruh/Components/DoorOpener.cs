@@ -44,6 +44,11 @@ public class DoorOpener : MonoBehaviour
         _needsUpdating = false;
     }
 
+    public void ResetBruh()
+    {
+        _playerSet = false;
+    }
+    
     private void OnEnable()
     {
         Enabled = true;

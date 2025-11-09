@@ -119,9 +119,12 @@ public class DoorStatus : MonoBehaviour
 
     private bool PlayersInRange(Player player, bool currentInRange, out bool previouslyInRange)
     {
-        var inRange = false;
-        
         previouslyInRange = currentInRange;
+        
+        if (!player)
+            return false;
+        
+        var inRange = false;
         
         var radius = player.m_maxInteractDistance;
         var radiusSquared = radius * radius;
