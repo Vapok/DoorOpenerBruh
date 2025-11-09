@@ -4,6 +4,8 @@
 * Automatically turns on Auto Door when mod is first installed.
   * This was giving the appearance that the mod didn't do anything when installed.
   * Original value required the player to enable the mod before doors would open.
+  * This will not change the value on already installed mods. 
+    * Either update or remove the configuration file.
 * Updating Dependencies
 
 ## 1.2.1 - Fixing Dedicated Server Config Syncing
