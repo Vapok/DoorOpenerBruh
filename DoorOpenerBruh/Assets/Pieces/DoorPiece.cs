@@ -12,8 +12,8 @@ public abstract class DoorPiece : IDoorPiece
     private string _prefabName;
     private string _pieceName;
     
-    internal ConfigEntry<AutomationMechanic> AutomationMechanic { get; private set;}
-    internal ConfigEntry<bool> CheckForKey { get; private set;}
+    internal ConfigEntry<AutomationMechanic> AutomationMechanic;
+    internal ConfigEntry<bool> CheckForKey;
     
     public string PrefabName => _prefabName;
     public string PieceName => _pieceName;
@@ -31,18 +31,18 @@ public abstract class DoorPiece : IDoorPiece
     
     internal virtual void RegisterAutomationMechanic(AutomationMechanic defaultValue = Components.AutomationMechanic.DoNotOpenAutomatically)
     {
-        AutomationMechanic = ConfigSyncBase.SyncedConfig(_configSection, "Automation Mechanic", defaultValue,
+        ConfigSyncBase.SyncedConfig(_configSection, "Automation Mechanic", defaultValue,
             new ConfigDescription("Determine door open automation based on list provided.",
                 null,
-                new ConfigurationManagerAttributes { Category = _configSection, Order = 1 }));
+                new ConfigurationManagerAttributes { Category = _configSection, Order = 1 }),ref AutomationMechanic);
     }
 
     internal virtual void RegisterCheckForKey(bool defaultValue)
     {
-        CheckForKey = ConfigSyncBase.SyncedConfig(_configSection, "Check for Key", defaultValue,
+        ConfigSyncBase.SyncedConfig(_configSection, "Check for Key", defaultValue,
             new ConfigDescription("If enabled, will automatically open locked doors, if player has key. If disabled, Doors with keys will not automatically open.",
                 null,
-                new ConfigurationManagerAttributes { Category = _configSection, Order = 2 }));
+                new ConfigurationManagerAttributes { Category = _configSection, Order = 2 }),ref CheckForKey);
     }
 
     internal bool ComputeAutomation(DoorStatus trackedDoor, bool keyDefined = false)

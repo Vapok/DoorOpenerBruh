@@ -25,6 +25,6 @@ Source: [Github](https://github.com/Vapok/DoorOpenerBruh)
 
 Discord: [Vapok's Mod's Community](https://discord.gg/5YAJkRFBXt)
 
-Patch notes: [Github Patchnotes](https://github.com/Vapok/DoorOpenerBruh/blob/main/PATCHNOTES.md)
+Patch notes: [Thunderstore Patchnotes](https://thunderstore.io/c/valheim/p/Vapok/DoorOpenerBruh/changelog/)
 
 
