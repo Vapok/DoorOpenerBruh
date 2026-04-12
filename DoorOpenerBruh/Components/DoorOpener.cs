@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using DoorOpenerBruh.Patches;
+using Jotunn;
+using UnityEngine;
 
 namespace DoorOpenerBruh.Components;
 
@@ -24,10 +26,25 @@ public class DoorOpener : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        
+        DoorOpenerBruh.Log.Debug($"Door Queue Count: {DoorPatches.DoorAwakePatch.Doors.Count}");
+        
+        while (DoorPatches.DoorAwakePatch.Doors != null && DoorPatches.DoorAwakePatch.Doors.Count > 0)
+        {
+            var door = DoorPatches.DoorAwakePatch.Doors.Dequeue();
+            
+            if (door == null) continue;
+            
+            DoorOpenerBruh.Log.Debug($"Queued Door ID: {door.m_nview.m_zdo.m_uid.ID}");
+            
+            door.gameObject.GetOrAddComponent<DoorStatus>();
+        }
     }
 
     private void Update()
     {
+
+        
         if (!_needsUpdating)
             return;
 
