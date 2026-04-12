@@ -1,4 +1,4 @@
-﻿/* DoorOpenerBruh by Vapok */
+/* DoorOpenerBruh by Vapok */
 using System;
 using System.Reflection;
 using BepInEx;
@@ -20,13 +20,12 @@ namespace DoorOpenerBruh
     [BepInDependency(Jotunn.Main.ModGuid)]
     [BepInDependency("com.ValheimModding.YamlDotNetDetector")]
     
-    [SynchronizationMode(AdminOnlyStrictness.IfOnServer)]
     public class DoorOpenerBruh : BaseUnityPlugin, IPluginInfo
     {
         //Module Constants
         private const string _pluginId = "vapok.mods.DoorOpenerBruh";
         private const string _displayName = "DoorOpenerBruh";
-        private const string _version = "1.2.2";
+        private const string _version = "1.2.4";
         
         //Interface Properties
         public string PluginId => _pluginId;

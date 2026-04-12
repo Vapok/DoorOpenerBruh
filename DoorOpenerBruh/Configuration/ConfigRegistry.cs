@@ -27,10 +27,10 @@ namespace DoorOpenerBruh.Configuration
                 return;
             
             //User Configs
-             SyncedConfig("Synced Settings", "Enable Auto Door", true,
+            UnsyncedConfig("Local Settings", "Enable Auto Door", true,
                 new ConfigDescription("If true, will automatically open doors.",
                     null, 
-                    new ConfigurationManagerAttributes { Category = "Synced Settings", Order = 1 }),ref Enabled);
+                    new ConfigurationManagerAttributes { Category = "Local Settings", Order = 1 }),ref Enabled);
         }
     }
     

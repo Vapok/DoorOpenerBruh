@@ -1,5 +1,17 @@
 # DoorOpenerBruh Patch Notes
 
+## 1.2.4 - PieceManager and Buildable Nature Compatibility
+* Bug/Compatibility Fix: DoorOpener and DoorStatus's were happening add odd times and, they need to be ordered.
+  * Added guardrails to ensure DoorStatus components weren't added before DoorOpener is ready.
+* Updated Jotunn to 2.29.0.
+
+## 1.2.3 - Local Config Change & Dependency Maintenance
+* Changed to Local Configuration only.
+  * This makes it a client side only mod, and users can adjust settings without affecting other users.
+* Updated to Valheim 0.221.12 references.
+* Updated Vapok.Valheim.Common to 2.11.22112.
+* Updated Jotunn to 2.27.1.
+
 ## 1.2.2 - Changing Default Enable
 * Automatically turns on Auto Door when mod is first installed.
   * This was giving the appearance that the mod didn't do anything when installed.

@@ -53,7 +53,7 @@ public class DoorStatus : MonoBehaviour
 
     private void UpdateState()
     {
-        if (_trackedDoor.m_nview.GetZDO().IsValid())
+        if (_trackedDoor?.m_nview == null && _trackedDoor.m_nview.GetZDO().IsValid())
             _status = _trackedDoor.m_nview.GetZDO().GetInt(ZDOVars.s_state);
     }
     
