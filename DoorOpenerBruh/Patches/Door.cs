@@ -2,6 +2,7 @@
 using DoorOpenerBruh.Components;
 using HarmonyLib;
 using JetBrains.Annotations;
+using Jotunn;
 
 namespace DoorOpenerBruh.Patches;
 
@@ -13,13 +14,13 @@ public static class DoorPatches
         // This Queue is for tracking doors that have awoken before DoorOpener. 
         // We'll keep track of the doors until DoorOpener is available.
         
-        public static Queue<Door> Doors  = new ();
+        public static Queue<Door> Doors = new ();
         
         [UsedImplicitly]
         static void Postfix(Door __instance)
         {
             if (DoorOpener.Instance != null)
-                __instance.gameObject.AddComponent<DoorStatus>();
+                __instance.gameObject.GetOrAddComponent<DoorStatus>();
             else
                 Doors.Enqueue(__instance);
         }

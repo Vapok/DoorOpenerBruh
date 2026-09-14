@@ -11,17 +11,17 @@ public enum AutomationMechanic
     OpenAllDoors,
     DoNotOpenAutomatically
 }
+
 public class DoorOpener : MonoBehaviour
 {
     public static DoorOpener Instance;
 
-    public Player Bruh;
+    public Player Bruh => Player.m_localPlayer;
     public bool Enabled;
-    public bool PlayerSet => _playerSet;
+    public bool PlayerSet => Player.m_localPlayer != null;
 
     private int _doorCount;
     private bool _needsUpdating = true;
-    private bool _playerSet;
     
     private void Awake()
     {
@@ -35,7 +35,8 @@ public class DoorOpener : MonoBehaviour
             
             if (door == null) continue;
             
-            DoorOpenerBruh.Log.Debug($"Queued Door ID: {door.m_nview.m_zdo.m_uid.ID}");
+            if (door.m_nview != null && door.m_nview.GetZDO() != null)
+                DoorOpenerBruh.Log.Debug($"Queued Door ID: {door.m_nview.GetZDO().m_uid.ID}");
             
             door.gameObject.GetOrAddComponent<DoorStatus>();
         }
@@ -43,19 +44,11 @@ public class DoorOpener : MonoBehaviour
 
     private void Update()
     {
-
-        
         if (!_needsUpdating)
             return;
 
-        if (!_playerSet)
-            if (Player.m_localPlayer != null)
-            {
-                Bruh = Player.m_localPlayer;
-                _playerSet = true;
-            }
-            else
-                return;
+        if (Player.m_localPlayer == null)
+            return;
         
         DoorOpenerBruh.Log.Debug($"Tracking {_doorCount} doors.");
         _needsUpdating = false;
@@ -63,7 +56,7 @@ public class DoorOpener : MonoBehaviour
 
     public void ResetBruh()
     {
-        _playerSet = false;
+        _needsUpdating = true;
     }
     
     private void OnEnable()
@@ -76,11 +69,19 @@ public class DoorOpener : MonoBehaviour
         Enabled = false;
     }
 
+    private void OnDestroy()
+    {
+        DoorPatches.DoorAwakePatch.Doors?.Clear();
+        if (Instance == this)
+            Instance = null;
+    }
+
     public void AddDoor(Door trackedDoor)
     {
         _doorCount++;
         _needsUpdating = true;
     }
+
     public void RemoveDoor(Door trackedDoor)
     {
         _doorCount--;

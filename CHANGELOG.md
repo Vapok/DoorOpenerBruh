@@ -1,5 +1,21 @@
 # DoorOpenerBruh Patch Notes
 
+## 2.0.0 - Valheim 1.0, Ashlands, Deep North & Drawbridges
+* **Valheim 1.0 Compatibility**:
+  * Updated references and dependencies for Valheim 1.0 and Jotunn 2.30.0.
+  * Resolved critical networking and RPC synchronization issues for remote multiplayer clients when doors auto-close.
+  * Fixed live ZDO state inspection and resolved local player reference handling on respawn/reconnect.
+* **New Doors & Drawbridge Support**:
+  * Added support and dedicated configuration options for Timberwood Drawbridge (`piece_drawbridge`) and Rustic Drawbridge (`piece_drawbridge_log`).
+  * Added support for Ashwood Door (`ashwood_door`), Flametal Gate (`flametal_gate`), Grausten Door (`piece_grausten_door`), and Grausten Gate (`piece_grausten_gate`).
+* **Collider-Aware Bounds Detection & Distance Config**:
+  * Implemented bounds proximity checking across large structures (such as drawbridges) to prevent doors/bridges from closing while traversing them.
+  * Added per-door configurable `Open Distance` and `Close Distance` settings with hysteresis to prevent edge jitter.
+  * Eliminated stale state polling intervals for instantaneous responsiveness upon approach and departure.
+
+<details>
+<summary><b>Previous Patch Notes</b></summary>
+
 ## 1.2.4 - PieceManager and Buildable Nature Compatibility
 * Bug/Compatibility Fix: DoorOpener and DoorStatus's were happening add odd times and, they need to be ordered.
   * Added guardrails to ensure DoorStatus components weren't added before DoorOpener is ready.
@@ -55,3 +71,5 @@
 
 ## v1.0.0 - Initial Version of DoorOpenerBruh
 * Initial Release of Automatic Door Opener
+
+</details>

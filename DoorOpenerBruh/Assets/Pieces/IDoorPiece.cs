@@ -7,4 +7,6 @@ public interface IDoorPiece
     string PrefabName { get; }
     string PieceName { get; }
     bool DoorAutomationEnabled(DoorStatus trackedDoor);
+    float GetOpenDistance();
+    float GetCloseDistance();
 }

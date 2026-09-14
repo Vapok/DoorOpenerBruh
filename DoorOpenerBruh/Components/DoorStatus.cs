@@ -1,5 +1,6 @@
 ﻿using System;
 using DoorOpenerBruh.Assets.Factories;
+using DoorOpenerBruh.Assets.Pieces;
 using UnityEngine;
 
 namespace DoorOpenerBruh.Components;
@@ -15,6 +16,9 @@ public class DoorStatus : MonoBehaviour
     private int _status;
     private float _timeRemaining;
     private bool _started;
+    private string _prefabCleanName;
+    private IDoorPiece _doorPiece;
+    private Collider[] _colliders;
 
     public bool IsGhost => _isGhost;
     public Door TrackedDoor => _trackedDoor;
@@ -24,17 +28,16 @@ public class DoorStatus : MonoBehaviour
     {
         _trackedDoor = gameObject.GetComponent<Door>();
         _piece = gameObject.GetComponent<Piece>();
-        
-        InvokeRepeating(nameof(UpdateState),0.0f,0.2f);
+        _prefabCleanName = global::Utils.GetPrefabName(gameObject);
+        _colliders = gameObject.GetComponentsInChildren<Collider>(true);
     }
 
     private void Start()
     {
-        _isGhost = _trackedDoor.gameObject.layer == Piece.s_ghostLayer;
+        _isGhost = _trackedDoor != null && _trackedDoor.gameObject.layer == Piece.s_ghostLayer;
             
         if (_isGhost)
         {
-            CancelInvoke(nameof(UpdateState));
             enabled = false;
             return;
         }
@@ -43,20 +46,16 @@ public class DoorStatus : MonoBehaviour
 
     private void OnEnable()
     {
-        DoorOpener.Instance.AddDoor(_trackedDoor);
+        if (DoorOpener.Instance != null)
+            DoorOpener.Instance.AddDoor(_trackedDoor);
     }
 
     private void OnDisable()
     {
-        DoorOpener.Instance.RemoveDoor(_trackedDoor);
+        if (DoorOpener.Instance != null)
+            DoorOpener.Instance.RemoveDoor(_trackedDoor);
     }
 
-    private void UpdateState()
-    {
-        if (_trackedDoor?.m_nview == null && _trackedDoor.m_nview.GetZDO().IsValid())
-            _status = _trackedDoor.m_nview.GetZDO().GetInt(ZDOVars.s_state);
-    }
-    
     private void Update()
     {
         if (!_started) return;
@@ -67,34 +66,86 @@ public class DoorStatus : MonoBehaviour
         
         _timeRemaining = 0.02f;
         
-        if (!DoorOpener.Instance.Enabled)
+        if (DoorOpener.Instance == null || !DoorOpener.Instance.Enabled)
             return;
 
         CheckPlayerPositionForDoors();
     }
 
-    private bool IsEnabled()
+    private IDoorPiece GetDoorPiece()
     {
-        if (!DoorFactory.DoorPieces.TryGetValue(_trackedDoor.gameObject.name.Replace("(Clone)",String.Empty),out var doorPiece))
-            doorPiece = DoorFactory.DoorPieces["other"];
-        
-        _enabled = doorPiece.DoorAutomationEnabled(this);
-        return _enabled;
+        if (_doorPiece != null)
+            return _doorPiece;
+
+        if (string.IsNullOrEmpty(_prefabCleanName) && _trackedDoor != null)
+            _prefabCleanName = global::Utils.GetPrefabName(gameObject);
+
+        if (DoorFactory.DoorPieces != null)
+        {
+            if (DoorFactory.DoorPieces.TryGetValue(_prefabCleanName ?? string.Empty, out var doorPiece))
+                _doorPiece = doorPiece;
+            else if (DoorFactory.DoorPieces.TryGetValue("other", out var otherPiece))
+                _doorPiece = otherPiece;
+        }
+
+        return _doorPiece;
+    }
+
+    private float GetDistanceToPlayer(Player player)
+    {
+        var playerPos = player.transform.position;
+        var minDistance = Vector3.Distance(_trackedDoor.transform.position, playerPos);
+
+        if (_colliders != null && _colliders.Length > 0)
+        {
+            for (int i = 0; i < _colliders.Length; i++)
+            {
+                var col = _colliders[i];
+                if (col == null || !col.enabled || col.isTrigger) continue;
+
+                var closest = col.bounds.ClosestPoint(playerPos);
+                var dist = Vector3.Distance(closest, playerPos);
+                if (dist < minDistance)
+                    minDistance = dist;
+            }
+        }
+        return minDistance;
     }
 
     private void CheckPlayerPositionForDoors()
     {
+        if (DoorOpener.Instance == null) return;
+
         var player = DoorOpener.Instance.Bruh;
-        
-        if (player is null || player.IsDead())
+        if (player == null || player.IsDead() || _trackedDoor == null)
             return;
-        
-        _inRange = PlayersInRange(player, _inRange, out var previousInRange);
+
+        if (_trackedDoor.m_nview == null || !_trackedDoor.m_nview.IsValid())
+            return;
+
+        _status = _trackedDoor.m_nview.GetZDO().GetInt(ZDOVars.s_state, 0);
+
+        var doorPiece = GetDoorPiece();
+        var openDist = doorPiece?.GetOpenDistance() ?? 3.0f;
+        var closeDist = doorPiece?.GetCloseDistance() ?? 4.5f;
+
+        var currentDist = GetDistanceToPlayer(player);
 
         if (_inRange)
         {
-            _enabled = IsEnabled();
-            if (_enabled && ((_status == 0 && !_trackedDoor.m_invertedOpenClosedText)||(_status != 0 && _trackedDoor.m_invertedOpenClosedText)))
+            if (currentDist > closeDist)
+                _inRange = false;
+        }
+        else
+        {
+            if (currentDist <= openDist)
+                _inRange = true;
+        }
+
+        if (_inRange)
+        {
+            _enabled = doorPiece != null && doorPiece.DoorAutomationEnabled(this);
+            if (_enabled && ((_status == 0 && !_trackedDoor.m_invertedOpenClosedText) || (_status != 0 && _trackedDoor.m_invertedOpenClosedText)))
             {
                 if (!_autoOpened)
                 {
@@ -109,39 +160,21 @@ public class DoorStatus : MonoBehaviour
         }
         else
         {
-            if (_enabled && _autoOpened)
+            if (_autoOpened)
             {
-                SetState(_trackedDoor.m_invertedOpenClosedText ? 1 :0);
+                _enabled = doorPiece != null && doorPiece.DoorAutomationEnabled(this);
+                if (_enabled)
+                {
+                    SetState(_trackedDoor.m_invertedOpenClosedText ? 1 : 0);
+                }
                 _autoOpened = false;
             }
         }
     }
 
-    private bool PlayersInRange(Player player, bool currentInRange, out bool previouslyInRange)
-    {
-        previouslyInRange = currentInRange;
-        
-        if (!player)
-            return false;
-        
-        var inRange = false;
-        
-        var radius = player.m_maxInteractDistance;
-        var radiusSquared = radius * radius;
-
-        bool InRangeOfDoor(Vector3 playerPos)
-        {
-            var distanceSquared = Vector3.SqrMagnitude(_trackedDoor.transform.position - playerPos);
-            return distanceSquared <= radiusSquared;
-        }
-
-        inRange = InRangeOfDoor(player.transform.position);
-        
-        return inRange;
-    }
     private void SetState(int state)
     {
-        if (_trackedDoor.m_nview.GetZDO().IsValid())
-            _trackedDoor.m_nview.GetZDO().Set(ZDOVars.s_state,state);
+        if (_trackedDoor != null && _trackedDoor.m_nview != null && _trackedDoor.m_nview.IsValid())
+            _trackedDoor.m_nview.InvokeRPC("UseDoor", state);
     }
 }
