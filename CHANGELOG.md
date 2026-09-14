@@ -1,6 +1,6 @@
 # DoorOpenerBruh Patch Notes
 
-## 2.0.0 - Valheim 1.0, Ashlands, Deep North & Drawbridges
+## 2.0.0 - Valheim 1.0, Ashlands Doors and Deep North Drawbridges
 * **Valheim 1.0 Compatibility**:
   * Updated references and dependencies for Valheim 1.0 and Jotunn 2.30.0.
   * Resolved critical networking and RPC synchronization issues for remote multiplayer clients when doors auto-close.
