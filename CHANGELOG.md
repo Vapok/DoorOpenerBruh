@@ -1,75 +1,67 @@
-# DoorOpenerBruh Patch Notes
-
-## 2.0.0 - Valheim 1.0, Ashlands Doors and Deep North Drawbridges
-* **Valheim 1.0 Compatibility**:
-  * Updated references and dependencies for Valheim 1.0 and Jotunn 2.30.0.
-  * Resolved critical networking and RPC synchronization issues for remote multiplayer clients when doors auto-close.
-  * Fixed live ZDO state inspection and resolved local player reference handling on respawn/reconnect.
-* **New Doors & Drawbridge Support**:
-  * Added support and dedicated configuration options for Timberwood Drawbridge (`piece_drawbridge`) and Rustic Drawbridge (`piece_drawbridge_log`).
-  * Added support for Ashwood Door (`ashwood_door`), Flametal Gate (`flametal_gate`), Grausten Door (`piece_grausten_door`), and Grausten Gate (`piece_grausten_gate`).
-* **Collider-Aware Bounds Detection & Distance Config**:
-  * Implemented bounds proximity checking across large structures (such as drawbridges) to prevent doors/bridges from closing while traversing them.
-  * Added per-door configurable `Open Distance` and `Close Distance` settings with hysteresis to prevent edge jitter.
-  * Eliminated stale state polling intervals for instantaneous responsiveness upon approach and departure.
+# 2.0.1 - Dependency & Compatibility Maintenance
+* **Dependency Updates**: Updated Jotunn and BepInEx runtime package bindings.
+* **Compatibility Maintenance**: Verified compatibility against the latest Valheim 1.0 release.
+* **Documentation Improvements**: Standardized README, user guides, and technical patch documentation.
 
 <details>
-<summary><b>Previous Patch Notes</b></summary>
+<summary><b>2.0 Changelog History (Valheim Release)</b> (<i>click to expand</i>)</summary>
 
-## 1.2.4 - PieceManager and Buildable Nature Compatibility
-* Bug/Compatibility Fix: DoorOpener and DoorStatus's were happening add odd times and, they need to be ordered.
-  * Added guardrails to ensure DoorStatus components weren't added before DoorOpener is ready.
+### 2.0.0 - Valheim 1.0, Ashlands Doors and Deep North Drawbridges
+* **Valheim 1.0 Compatibility**:
+  * Updated references and dependencies for Valheim 1.0 and Jotunn 2.30.0.
+  * Resolved network synchronization issues for remote multiplayer clients when doors auto-close.
+  * Fixed character reference handling on player respawn and server reconnect.
+* **New Doors & Drawbridge Support**:
+  * Added support and dedicated configuration settings for Timberwood Drawbridge, Rustic Drawbridge, Ashwood Door, Flametal Gate, Grausten Door, and Grausten Gate.
+* **Bounds Detection & Distance Config**:
+  * Implemented structure bounds proximity checking across large structures (such as drawbridges) to prevent doors/bridges from closing while walking across them.
+  * Added per-door configurable Open Distance and Close Distance settings.
+  * Improved proximity responsiveness upon approach and departure.
+
+</details>
+
+<details>
+<summary><b>1.0 Changelog History (Valheim Early Access)</b> (<i>click to expand</i>)</summary>
+
+### 1.2.4 - PieceManager and Buildable Nature Compatibility
+* Added initialization guardrails to ensure door status components initialize reliably.
 * Updated Jotunn to 2.29.0.
 
-## 1.2.3 - Local Config Change & Dependency Maintenance
-* Changed to Local Configuration only.
-  * This makes it a client side only mod, and users can adjust settings without affecting other users.
-* Updated to Valheim 0.221.12 references.
-* Updated Vapok.Valheim.Common to 2.11.22112.
-* Updated Jotunn to 2.27.1.
+### 1.2.3 - Local Configuration Change & Dependency Maintenance
+* Changed to client-side local configuration, allowing individual player customization.
+* Updated to Valheim 0.221.12 references, `Vapok.Valheim.Common` 2.11.22112, and Jotunn 2.27.1.
 
-## 1.2.2 - Changing Default Enable
-* Automatically turns on Auto Door when mod is first installed.
-  * This was giving the appearance that the mod didn't do anything when installed.
-  * Original value required the player to enable the mod before doors would open.
-  * This will not change the value on already installed mods. 
-    * Either update or remove the configuration file.
-* Updating Dependencies
+### 1.2.2 - Default Settings Update
+* Enabled automatic door opening by default on fresh mod installations.
+* Updated dependencies.
 
-## 1.2.1 - Fixing Dedicated Server Config Syncing
-* A regression issue was introduced when switching to Jotunn preventing servers from dictating configs to clients.
-  * This has been resolved.
-* Appropriately added the BepInDependency Flags for graceful mod exit if missing dependencies.
+### 1.2.1 - Dedicated Server Config Syncing Fix
+* Resolved an issue preventing dedicated servers from properly enforcing configuration settings on connected clients.
+* Added graceful dependency handling and notifications.
 
-## v1.2.0 - Removes ServerSync, adds JotunnVL  
-* Updating for Valheim 0.221.4
+### 1.2.0 - Jotunn Migration
+* Transitioned to Jotunn library and updated for Valheim 0.221.4.
 
-## v1.1.4 - Updates for 0.217.28
-* Updating for Valheim 0.217.28
-* Fixed issue where doors don't open after death.
+### 1.1.4 - Valheim 0.217.28 Maintenance
+* Updated for Valheim 0.217.28.
+* Fixed issue where doors failed to open following character death.
 
-## v1.1.3 - Updates for 0.217.24
-* Updating for Valheim 0.217.24
+### 1.1.3 - Valheim 0.217.24 Maintenance
+* Updated for Valheim 0.217.24.
 
-## v1.1.2 - Bug Fixes and Error Management
-* Fixing Death and Spawn Error Messaages.
-  * They didn't affect or prevent correct operation.
+### 1.1.2 - Spawn & Death Error Handling
+* Fixed error logs generated during player death and respawn events.
 
-## v1.1.1 - Door Management and Config
-* Introducing Config Settings for Everydoor in the Game.
-  * Auto Close/Open settings based on type of Door
-  * Auto Close/Open Methods based on Self-made Door, or Player Only made Doors.
-  * Auto Close/Open Doors with Keys (if player has them)
-  * Configuration is ServerSync-able
-  * Respects Wards and Private Access Areas
-* Improved the detection and increased the check speed to attempt to prevent non-closures.
-* Removed artifact translations
-* Cleaned up additional bugs 
+### 1.1.1 - Per-Door Configuration & Ward Respect
+* Added configuration settings for every door in the game.
+* Implemented automatic door open/close checks based on door type and player ownership.
+* Added automatic opening for locked doors when carrying required keys.
+* Added respect for player wards and private access zones.
 
-## v1.0.1 - Updating to work without other mods now.
-* Fixing startup errors when the mod is ran by itself.
+### 1.0.1 - Standalone Compatibility
+* Fixed startup errors when running without other companion mods installed.
 
-## v1.0.0 - Initial Version of DoorOpenerBruh
-* Initial Release of Automatic Door Opener
+### 1.0.0 - Initial Release of DoorOpenerBruh
+* Initial release of automatic door opening and closing mechanics.
 
 </details>
