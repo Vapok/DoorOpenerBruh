@@ -82,9 +82,11 @@ Fine-tune global toggles and per-door behavior in the in-game [BepInEx Configura
 
 <div align="center">
 
-🇺🇸 **English** • 🇩🇪 **German** • 🇫🇷 **French** • 🇪🇸 **Spanish** • 🇨🇳 **Chinese** • 🇷🇺 **Russian**
+🇺🇸 **English** (Default)
 
 </div>
+
+*Want to help translate Door Opener Bruh? Community translations are welcome! Please submit a PR on [GitHub](https://github.com/Vapok/DoorOpenerBruh) or stop by our [Discord](https://discord.gg/5YAJkRFBXt).*
 
 ---
 
