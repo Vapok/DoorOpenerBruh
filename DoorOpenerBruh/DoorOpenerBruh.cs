@@ -12,6 +12,7 @@ using Vapok.Common.Abstractions;
 using Vapok.Common.Managers;
 using Vapok.Common.Managers.Configuration;
 using Vapok.Common.Managers.LocalizationManager;
+using Vapok.Common.Managers.Splash;
 using Vapok.Common.Tools;
 
 namespace DoorOpenerBruh
@@ -23,9 +24,9 @@ namespace DoorOpenerBruh
     public class DoorOpenerBruh : BaseUnityPlugin, IPluginInfo
     {
         //Module Constants
-        private const string _pluginId = "vapok.mods.DoorOpenerBruh";
+        private const string _pluginId = "vapok.mods.dooropenerbruh";
         private const string _displayName = "DoorOpenerBruh";
-        private const string _version = "2.0.1";
+        private const string _version = "2.0.2";
         
         //Interface Properties
         public string PluginId => _pluginId;
@@ -72,6 +73,14 @@ namespace DoorOpenerBruh
             //Patch Harmony
             _harmony = new Harmony(Info.Metadata.GUID);
             _harmony.PatchAll(Assembly.GetExecutingAssembly());
+
+            //Register Mod Splash Screen
+            ModSplashManager.Register(new ModSplashDossier(_instance)
+            {
+                Tagline = "Automatic door and gate opening and closing mechanics with configurable proximity.",
+                ShowOnStartup = ConfigRegistry.ShowSplashOnStartup,
+                EnableTelemetry = ConfigRegistry.EnableTelemetry,
+            });
 
             //???
 
