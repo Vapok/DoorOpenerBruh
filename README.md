@@ -23,7 +23,7 @@ Never get snagged on your castle gates, longhouse doors, or dungeon entrances ag
 
 <br>
 
-[![Survival Servers](https://raw.githubusercontent.com/Vapok/DoorOpenerBruh/refs/heads/main/images/survivalservers_banner.png)](https://www.survivalservers.com/services/game_servers/valheim/?ref=vapok)
+[![Survival Servers](https://raw.githubusercontent.com/Vapok/DoorOpenerBruh/main/images/survivalservers_banner.png)](https://www.survivalservers.com/services/game_servers/valheim/?ref=vapok)
 
 </div>
 
