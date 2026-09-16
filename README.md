@@ -4,8 +4,6 @@
 
 ### *Automated door opening and closing mechanics for Valheim.*
 
-[![Survival Servers](https://ibin.co/5RCcxHBNFp)](https://www.survivalservers.com/services/game_servers/valheim/?ref=vapok)
-
 [![GitHub Release](https://img.shields.io/github/v/release/Vapok/DoorOpenerBruh?include_prereleases&logo=github&style=for-the-badge)](https://github.com/Vapok/DoorOpenerBruh/releases)
 [![Thunderstore Version](https://img.shields.io/thunderstore/v/Vapok/DoorOpenerBruh?logo=thunderstore&style=for-the-badge)](https://thunderstore.io/c/valheim/p/Vapok/DoorOpenerBruh/)
 [![Nexus Mods](https://img.shields.io/badge/Nexus_Mods-Available-da8e35?logo=nexusmods&style=for-the-badge)](https://www.nexusmods.com/valheim/mods/2506)
@@ -20,6 +18,14 @@
 Never get snagged on your castle gates, longhouse doors, or dungeon entrances again! **DoorOpenerBruh** automatically swings open doors, gates, and drawbridges as you approach, and gently closes them behind you once you depart.
 
 ---
+
+<div align="center">
+
+<br>
+
+[![Survival Servers](https://raw.githubusercontent.com/Vapok/DoorOpenerBruh/refs/heads/main/images/survivalservers_banner.png)](https://www.survivalservers.com/services/game_servers/valheim/?ref=vapok)
+
+</div>
 
 ## 🚪 How It Works
 
