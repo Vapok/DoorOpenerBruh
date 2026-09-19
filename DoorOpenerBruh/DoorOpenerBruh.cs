@@ -26,7 +26,7 @@ namespace DoorOpenerBruh
         //Module Constants
         private const string _pluginId = "vapok.mods.dooropenerbruh";
         private const string _displayName = "DoorOpenerBruh";
-        private const string _version = "2.0.6";
+        private const string _version = "2.0.7";
         
         //Interface Properties
         public string PluginId => _pluginId;
