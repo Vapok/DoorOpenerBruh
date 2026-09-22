@@ -1,6 +1,7 @@
 using System;
 using DoorOpenerBruh.Assets.Factories;
 using DoorOpenerBruh.Assets.Pieces;
+using Jotunn.Managers;
 using UnityEngine;
 
 namespace DoorOpenerBruh.Components;
@@ -34,7 +35,7 @@ public class DoorStatus : MonoBehaviour
 
     private void Start()
     {
-        if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null)
+        if (GUIManager.IsHeadless())
         {
             enabled = false;
             return;

@@ -1,4 +1,5 @@
 using HarmonyLib;
+using Jotunn.Managers;
 
 namespace DoorOpenerBruh.Patches;
 
@@ -10,7 +11,7 @@ internal static class FejdStartupPatches
     internal static class FejdStartupAwakePatch
     {
         [HarmonyPrepare]
-        private static bool Prepare() => UnityEngine.SystemInfo.graphicsDeviceType != UnityEngine.Rendering.GraphicsDeviceType.Null;
+        private static bool Prepare() => !GUIManager.IsHeadless();
 
         private static void Prefix()
         {

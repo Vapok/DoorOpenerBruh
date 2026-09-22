@@ -83,7 +83,7 @@ namespace DoorOpenerBruh
                 EnableTelemetry = ConfigRegistry.EnableTelemetry,
             });
 
-            if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null)
+            if (GUIManager.IsHeadless())
             {
                 InitializeModule(this, EventArgs.Empty);
             }

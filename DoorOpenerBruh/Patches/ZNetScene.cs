@@ -1,5 +1,6 @@
 using DoorOpenerBruh.Components;
 using HarmonyLib;
+using Jotunn.Managers;
 using UnityEngine;
 
 namespace DoorOpenerBruh.Patches;
@@ -10,7 +11,7 @@ internal static class ZNetScenePatches
     internal static class ZNetSceneAwakePatch
     {
         [HarmonyPrepare]
-        private static bool Prepare() => SystemInfo.graphicsDeviceType != UnityEngine.Rendering.GraphicsDeviceType.Null;
+        private static bool Prepare() => !GUIManager.IsHeadless();
 
         private static void Prefix(ZNetScene __instance)
         {

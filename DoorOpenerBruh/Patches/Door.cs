@@ -3,6 +3,7 @@ using DoorOpenerBruh.Components;
 using HarmonyLib;
 using JetBrains.Annotations;
 using Jotunn;
+using Jotunn.Managers;
 using UnityEngine;
 
 namespace DoorOpenerBruh.Patches;
@@ -13,7 +14,7 @@ internal static class DoorPatches
     internal static class DoorAwakePatch
     {
         [HarmonyPrepare]
-        private static bool Prepare() => SystemInfo.graphicsDeviceType != UnityEngine.Rendering.GraphicsDeviceType.Null;
+        private static bool Prepare() => !GUIManager.IsHeadless();
 
         internal static Queue<Door> Doors = new ();
         

@@ -1,5 +1,6 @@
 using DoorOpenerBruh.Components;
 using HarmonyLib;
+using Jotunn.Managers;
 
 namespace DoorOpenerBruh.Patches;
 
@@ -9,7 +10,7 @@ internal static class PlayerPatches
     internal static class PlayerSetLocalPlayerPatch
     {
         [HarmonyPrepare]
-        private static bool Prepare() => UnityEngine.SystemInfo.graphicsDeviceType != UnityEngine.Rendering.GraphicsDeviceType.Null;
+        private static bool Prepare() => !GUIManager.IsHeadless();
 
         private static void Postfix()
         {
