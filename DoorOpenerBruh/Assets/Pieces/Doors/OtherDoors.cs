@@ -20,6 +20,6 @@ public class OtherDoors : DoorPiece
     internal sealed override void RegisterConfigSettings()
     {
         RegisterAutomationMechanic(Components.AutomationMechanic.OnlyOpenAllPlayerMadeDoors);
-        RegisterCheckForKey(true);
+        RegisterCheckForKey(false);
     }
 }

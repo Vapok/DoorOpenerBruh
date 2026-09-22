@@ -1,11 +1,10 @@
-# 2.0.8 - Key Requirements, Server Configuration Sync & Stability
-* **Key Requirement by Default & Server Syncing**:
-  * Migrated `Check for Key` in `DoorPiece.cs` from `UnsyncedConfig` to `SyncedConfig`, synchronizing locked door key requirements from the server and allowing server admins to enforce key validation.
-  * Changed default value of `Check for Key` from `false` to `true` across `DoorPiece.cs`, `DungeonQueenDoor.cs`, `SunkenCryptIronGate.cs`, and `OtherDoors.cs`.
+# 2.0.8 - Expanded Door Support, Dedicated Server Support & Stability
+* **Expanded Door Piece Classes**:
+  * Added dedicated classes and configuration sections for buildable pieces using the vanilla `Door` component: `WindowShutter.cs` (`Buildable: Wood Shutter`), `WoodFenceGate.cs` (`Buildable: Wood Fence Gate`), and `StaveGate.cs` (`Buildable: Stave Gate`).
 * **Dedicated Server Support & Safeguards**:
-  * In `DoorOpenerBruh.cs` `Awake()`, added immediate headless initialization (`InitializeModule`) when `SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null`, ensuring `DoorFactory` registers all synchronized door configurations and ServerSync serves them on dedicated servers.
-  * Implemented fail-before-patching via `[HarmonyPrepare]` returning `SystemInfo.graphicsDeviceType != GraphicsDeviceType.Null` across all client-only patch classes (`DoorPatches`, `ZNetScenePatches`, `PlayerPatches`, `FejdStartupPatches`), ensuring Harmony never touches or hooks game methods on dedicated servers.
-  * In `DoorStatus.cs`, added `SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null` bypass in `Start()` to prevent active polling on headless servers.
+  * In `DoorOpenerBruh.cs` `Awake()`, added immediate headless initialization (`InitializeModule`) when `GUIManager.IsHeadless()`, ensuring `DoorFactory` registers all synchronized door configurations and ServerSync serves them on dedicated servers.
+  * Implemented fail-before-patching via `[HarmonyPrepare]` returning `!GUIManager.IsHeadless()` across all client-only patch classes (`DoorPatches`, `ZNetScenePatches`, `PlayerPatches`, `FejdStartupPatches`), ensuring Harmony never touches or hooks game methods on dedicated servers.
+  * In `DoorStatus.cs`, added `GUIManager.IsHeadless()` bypass in `Start()` to prevent active polling on headless servers.
   * Wrapped `_trackedDoor.Interact` in defensive try/catch blocks with guarded logging, preventing third-party ward crashes (e.g. `LegacyWard` / `WackyWard`), resolving [DOOROPENERBRUH-2](https://vapok-gaming.sentry.io/issues/DOOROPENERBRUH-2).
   * Enforced explicit typing across `DoorStatus.cs`, eliminating lazy `var` declarations.
 * **Library Updates**:

@@ -1,7 +1,6 @@
-# 2.0.8 - Key Requirements, Server Configuration Sync & Stability
-* **Key Requirement by Default**: Locked world and dungeon doors (like the Mistlands Queen Door and Sunken Crypt Gate) now check if the player has the required key by default before opening.
-* **Server-Synced Key Checks**: The "Check for Key" option is now enforced by servers, allowing server admins to prevent players from bypassing door locks.
-* **Dedicated Server Support**: Enabled full configuration loading and server syncing on headless dedicated servers while disabling unnecessary client door checks.
+# 2.0.8 - Expanded Door Support, Dedicated Server Support & Stability
+* **Expanded Door Support**: Added dedicated configuration settings for Wood Shutters, Wood Fence Gates, and Stave Gates.
+* **Dedicated Server Support**: Enabled full configuration loading on headless dedicated servers while bypassing client-only door checks.
 * **Door Interaction Safety**: Fixed an issue where third-party mod wards could cause errors when doors open.
 * **Dependency Updates**: Updated internal libraries for stability and configuration performance.
 

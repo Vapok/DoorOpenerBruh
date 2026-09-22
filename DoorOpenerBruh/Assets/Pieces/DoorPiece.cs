@@ -57,9 +57,9 @@ public abstract class DoorPiece : IDoorPiece
         RegisterDistances(defaultOpen, defaultClose);
     }
 
-    internal virtual void RegisterCheckForKey(bool defaultValue = true)
+    internal virtual void RegisterCheckForKey(bool defaultValue = false)
     {
-        ConfigSyncBase.SyncedConfig(_configSection, "Check for Key", defaultValue,
+        ConfigSyncBase.UnsyncedConfig(_configSection, "Check for Key", defaultValue,
             new ConfigDescription("If enabled, will automatically open locked doors, if player has key. If disabled, Doors with keys will not automatically open.",
                 null,
                 new ConfigurationManagerAttributes { Category = _configSection, Order = 2 }), ref CheckForKey);

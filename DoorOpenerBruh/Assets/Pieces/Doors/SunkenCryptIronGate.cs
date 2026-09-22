@@ -20,6 +20,6 @@ public class SunkenCryptIronGate : DoorPiece
     internal sealed override void RegisterConfigSettings()
     {
         RegisterAutomationMechanic();
-        RegisterCheckForKey(true);
+        RegisterCheckForKey(false);
     }
 }
