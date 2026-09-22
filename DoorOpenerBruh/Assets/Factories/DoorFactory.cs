@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using DoorOpenerBruh.Assets.Pieces;
 using DoorOpenerBruh.Assets.Pieces.Doors;
 using Vapok.Common.Abstractions;
@@ -34,6 +34,9 @@ public class DoorFactory : FactoryBase
         _doorPieces.Add("MountainKit_wood_gate", new MountainWoodGate("MountainKit_wood_gate", "$piece_woodgate", "World: Mountain Wood Gate"));
         _doorPieces.Add("sunken_crypt_gate", new SunkenCryptIronGate("sunken_crypt_gate", "$piece_irongate", "World: Sunken Crypt Gate"));
         _doorPieces.Add("wood_gate", new WoodGate("wood_gate", "$piece_woodgate", "Buildable: Wood Gate"));
+        _doorPieces.Add("wood_window", new WindowShutter("wood_window", "$piece_woodwindowshutter", "Buildable: Wood Shutter"));
+        _doorPieces.Add("wood_fence_gate", new WoodFenceGate("wood_fence_gate", "$piece_woodfencegate", "Buildable: Wood Fence Gate"));
+        _doorPieces.Add("stave_gate", new StaveGate("stave_gate", "$piece_stavegate", "Buildable: Stave Gate"));
         _doorPieces.Add("other", new OtherDoors("other", "other", "Other: Other and Custom Doors"));
     }
 }

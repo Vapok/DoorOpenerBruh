@@ -1,19 +1,17 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 
 namespace DoorOpenerBruh.Patches;
 
-public class FejdStartupPatches
+internal static class FejdStartupPatches
 {
-
     [HarmonyPatch(typeof(FejdStartup), nameof(FejdStartup.Awake))]
     [HarmonyAfter("org.bepinex.helpers.LocalizationManager")]
     [HarmonyBefore("org.bepinex.helpers.ItemManager")]
-    public static class FejdStartupAwakePatch
+    internal static class FejdStartupAwakePatch
     {
-        static void Prefix()
+        private static void Prefix()
         {
             DoorOpenerBruh.Waiter.ValheimIsAwake(true);
         }
     }
-
 }

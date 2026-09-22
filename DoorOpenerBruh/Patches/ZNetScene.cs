@@ -1,15 +1,19 @@
-﻿using DoorOpenerBruh.Components;
+using DoorOpenerBruh.Components;
 using HarmonyLib;
+using UnityEngine;
 
 namespace DoorOpenerBruh.Patches;
 
-public static class ZNetScenePatches
+internal static class ZNetScenePatches
 {
     [HarmonyPatch(typeof(ZNetScene), nameof(ZNetScene.Awake))]
-    public static class ZNetSceneAwakePatch
+    internal static class ZNetSceneAwakePatch
     {
-        static void Prefix(ZNetScene __instance)
+        private static void Prefix(ZNetScene __instance)
         {
+            if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null)
+                return;
+
             __instance.gameObject.AddComponent<DoorOpener>();
         }
     }

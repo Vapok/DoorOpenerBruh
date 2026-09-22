@@ -1,7 +1,9 @@
-# 2.0.8 - Door Interaction Safety & Dedicated Server Bypass
-* Fixed an issue where third-party mod wards could cause errors when doors open.
-* Disabled automated door checking on dedicated servers to save performance.
-* Updated internal libraries for better stability.
+# 2.0.8 - Key Requirements, Server Configuration Sync & Stability
+* **Key Requirement by Default**: Locked world and dungeon doors (like the Mistlands Queen Door and Sunken Crypt Gate) now check if the player has the required key by default before opening.
+* **Server-Synced Key Checks**: The "Check for Key" option is now enforced by servers, allowing server admins to prevent players from bypassing door locks.
+* **Dedicated Server Support**: Enabled full configuration loading and server syncing on headless dedicated servers while disabling unnecessary client door checks.
+* **Door Interaction Safety**: Fixed an issue where third-party mod wards could cause errors when doors open.
+* **Dependency Updates**: Updated internal libraries for stability and configuration performance.
 
 <details>
 <summary><b>2.0 Changelog History (Valheim Release)</b> (<i>click to expand</i>)</summary>

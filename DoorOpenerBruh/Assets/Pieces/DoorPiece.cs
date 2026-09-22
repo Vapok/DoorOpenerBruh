@@ -1,4 +1,4 @@
-﻿using BepInEx.Configuration;
+using BepInEx.Configuration;
 using DoorOpenerBruh.Components;
 using DoorOpenerBruh.Configuration;
 using Vapok.Common.Managers.Configuration;
@@ -57,9 +57,9 @@ public abstract class DoorPiece : IDoorPiece
         RegisterDistances(defaultOpen, defaultClose);
     }
 
-    internal virtual void RegisterCheckForKey(bool defaultValue)
+    internal virtual void RegisterCheckForKey(bool defaultValue = true)
     {
-        ConfigSyncBase.UnsyncedConfig(_configSection, "Check for Key", defaultValue,
+        ConfigSyncBase.SyncedConfig(_configSection, "Check for Key", defaultValue,
             new ConfigDescription("If enabled, will automatically open locked doors, if player has key. If disabled, Doors with keys will not automatically open.",
                 null,
                 new ConfigurationManagerAttributes { Category = _configSection, Order = 2 }), ref CheckForKey);
@@ -70,7 +70,7 @@ public abstract class DoorPiece : IDoorPiece
         if (trackedDoor == null || trackedDoor.TrackedDoor == null)
             return false;
 
-        var computeResult = false;
+        bool computeResult = false;
         switch (AutomationMechanic.Value)
         {
             case Components.AutomationMechanic.OpenAllDoors:
@@ -91,7 +91,10 @@ public abstract class DoorPiece : IDoorPiece
 
     private bool IsPlayerMadeDoor(DoorStatus trackedDoor)
     {
-        var nview = trackedDoor?.TrackedDoor?.m_nview;
+        if (trackedDoor == null || trackedDoor.TrackedDoor == null)
+            return false;
+
+        ZNetView nview = trackedDoor.TrackedDoor.m_nview;
         if (nview != null && nview.IsValid())
             return nview.GetZDO().GetLong(ZDOVars.s_creator) != 0L;
 
@@ -100,11 +103,11 @@ public abstract class DoorPiece : IDoorPiece
     
     private bool IsSelfMadeDoor(DoorStatus trackedDoor)
     {
-        var player = DoorOpener.Instance != null ? DoorOpener.Instance.Bruh : null;
-        if (player == null)
+        Player player = DoorOpener.Instance != null ? DoorOpener.Instance.Bruh : null;
+        if (player == null || trackedDoor == null || trackedDoor.TrackedDoor == null)
             return false;
 
-        var nview = trackedDoor?.TrackedDoor?.m_nview;
+        ZNetView nview = trackedDoor.TrackedDoor.m_nview;
         if (nview != null && nview.IsValid())
             return nview.GetZDO().GetLong(ZDOVars.s_creator) == player.GetPlayerID();
 
@@ -113,7 +116,7 @@ public abstract class DoorPiece : IDoorPiece
 
     private bool DefaultDoorEnablement(DoorStatus trackedDoor, bool keyDefined)
     {
-        var enabled = trackedDoor.isActiveAndEnabled &&
+        bool enabled = trackedDoor.isActiveAndEnabled &&
                       !trackedDoor.IsGhost &&
                       ConfigRegistry.Enabled.Value &&
                       DoorOpener.Instance != null &&
@@ -126,15 +129,15 @@ public abstract class DoorPiece : IDoorPiece
 
     private bool DetermineCheckForKey(DoorStatus trackedDoor, bool keyDefined)
     {
-        var enabled = trackedDoor.TrackedDoor.m_keyItem is null;
+        bool enabled = trackedDoor.TrackedDoor.m_keyItem == null;
 
         if (!keyDefined) return enabled;
         if (CheckForKey != null && CheckForKey.Value)
         {
             enabled = true;
-            if (trackedDoor.TrackedDoor.m_keyItem is not null)
+            if (trackedDoor.TrackedDoor.m_keyItem != null)
             {
-                var player = DoorOpener.Instance != null ? DoorOpener.Instance.Bruh : null;
+                Player player = DoorOpener.Instance != null ? DoorOpener.Instance.Bruh : null;
                 enabled = player != null && trackedDoor.TrackedDoor.HaveKey(player);
             }
         }

@@ -1,24 +1,25 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using DoorOpenerBruh.Components;
 using HarmonyLib;
 using JetBrains.Annotations;
 using Jotunn;
+using UnityEngine;
 
 namespace DoorOpenerBruh.Patches;
 
-public static class DoorPatches
+internal static class DoorPatches
 {
     [HarmonyPatch(typeof(Door), nameof(Door.Awake))]
-    public static class DoorAwakePatch
+    internal static class DoorAwakePatch
     {
-        // This Queue is for tracking doors that have awoken before DoorOpener. 
-        // We'll keep track of the doors until DoorOpener is available.
-        
-        public static Queue<Door> Doors = new ();
+        internal static Queue<Door> Doors = new ();
         
         [UsedImplicitly]
-        static void Postfix(Door __instance)
+        private static void Postfix(Door __instance)
         {
+            if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null)
+                return;
+
             if (DoorOpener.Instance != null)
                 __instance.gameObject.GetOrAddComponent<DoorStatus>();
             else

@@ -1,4 +1,4 @@
-﻿using DoorOpenerBruh.Components;
+using DoorOpenerBruh.Components;
 using DoorOpenerBruh.Configuration;
 
 namespace DoorOpenerBruh.Assets.Pieces.Doors;
@@ -12,7 +12,7 @@ public class OtherDoors : DoorPiece
 
     public override bool DoorAutomationEnabled(DoorStatus trackedDoor)
     {
-        var enabled = ComputeAutomation(trackedDoor, true);
+        bool enabled = ComputeAutomation(trackedDoor, true);
 
         return enabled;
     }
@@ -20,6 +20,6 @@ public class OtherDoors : DoorPiece
     internal sealed override void RegisterConfigSettings()
     {
         RegisterAutomationMechanic(Components.AutomationMechanic.OnlyOpenAllPlayerMadeDoors);
-        RegisterCheckForKey(false);
+        RegisterCheckForKey(true);
     }
 }

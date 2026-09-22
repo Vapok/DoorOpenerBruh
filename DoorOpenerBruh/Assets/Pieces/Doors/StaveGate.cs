@@ -3,23 +3,22 @@ using DoorOpenerBruh.Configuration;
 
 namespace DoorOpenerBruh.Assets.Pieces.Doors;
 
-public class SunkenCryptIronGate : DoorPiece
+public class StaveGate : DoorPiece
 {
-    public SunkenCryptIronGate(string prefabName, string pieceName, string configSection) : base(prefabName, pieceName, configSection)
+    public StaveGate(string prefabName, string pieceName, string configSection) : base(prefabName, pieceName, configSection)
     {
         RegisterConfigSettings();
     }
 
     public override bool DoorAutomationEnabled(DoorStatus trackedDoor)
     {
-        bool enabled = ComputeAutomation(trackedDoor, true);
+        bool enabled = ComputeAutomation(trackedDoor);
 
         return enabled;
     }
 
     internal sealed override void RegisterConfigSettings()
     {
-        RegisterAutomationMechanic();
-        RegisterCheckForKey(true);
+        RegisterAutomationMechanic(Components.AutomationMechanic.OpenAllDoors);
     }
 }

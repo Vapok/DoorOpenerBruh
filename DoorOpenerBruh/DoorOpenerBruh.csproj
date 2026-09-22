@@ -119,8 +119,11 @@
         <Compile Include="Assets\Pieces\Doors\MountainWoodGate.cs" />
         <Compile Include="Assets\Pieces\Doors\OtherDoors.cs" />
         <Compile Include="Assets\Pieces\Doors\RusticDrawbridge.cs" />
+        <Compile Include="Assets\Pieces\Doors\StaveGate.cs" />
         <Compile Include="Assets\Pieces\Doors\SunkenCryptIronGate.cs" />
+        <Compile Include="Assets\Pieces\Doors\WindowShutter.cs" />
         <Compile Include="Assets\Pieces\Doors\WoodDoor.cs" />
+        <Compile Include="Assets\Pieces\Doors\WoodFenceGate.cs" />
         <Compile Include="Assets\Pieces\Doors\WoodGate.cs" />
         <Compile Include="Assets\Pieces\IDoorPiece.cs" />
         <Compile Include="Components\DoorOpener.cs" />

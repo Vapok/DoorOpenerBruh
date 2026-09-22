@@ -4,6 +4,7 @@ using System.Reflection;
 using BepInEx;
 using HarmonyLib;
 using JetBrains.Annotations;
+using UnityEngine;
 using DoorOpenerBruh.Assets.Factories;
 using DoorOpenerBruh.Configuration;
 using Jotunn.Managers;
@@ -57,7 +58,7 @@ namespace DoorOpenerBruh
             Waiter = new Waiting();
             
             //Jotunn Localization
-            var localization = LocalizationManager.Instance.GetLocalization();
+            Jotunn.Entities.CustomLocalization localization = LocalizationManager.Instance.GetLocalization();
 
             //Register Logger
             LogManager.Init(PluginId,out _log);
@@ -82,9 +83,10 @@ namespace DoorOpenerBruh
                 EnableTelemetry = ConfigRegistry.EnableTelemetry,
             });
 
-            //???
-
-            //Profit
+            if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null)
+            {
+                InitializeModule(this, EventArgs.Empty);
+            }
         }
 
         public void InitializeModule(object send, EventArgs args)
@@ -93,7 +95,7 @@ namespace DoorOpenerBruh
                 return;
             
             //Register Effects
-            var effectsFactory = new EffectsFactory(_log, _config);
+            EffectsFactory effectsFactory = new EffectsFactory(_log, _config);
             effectsFactory.RegisterEffects();
             
             //Register Assets

@@ -1,5 +1,10 @@
-# 2.0.8 - Door Interaction Safety & Dedicated Server Bypass
-* **Door Interaction & Dedicated Server Safeguards**:
+# 2.0.8 - Key Requirements, Server Configuration Sync & Stability
+* **Key Requirement by Default & Server Syncing**:
+  * Migrated `Check for Key` in `DoorPiece.cs` from `UnsyncedConfig` to `SyncedConfig`, synchronizing locked door key requirements from the server and allowing server admins to enforce key validation.
+  * Changed default value of `Check for Key` from `false` to `true` across `DoorPiece.cs`, `DungeonQueenDoor.cs`, `SunkenCryptIronGate.cs`, and `OtherDoors.cs`.
+* **Dedicated Server Support & Safeguards**:
+  * In `DoorOpenerBruh.cs` `Awake()`, added immediate headless initialization (`InitializeModule`) when `SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null`, ensuring `DoorFactory` registers all synchronized door configurations and ServerSync serves them on dedicated servers.
+  * Added headless bypasses in `DoorPatches.DoorAwakePatch` and `ZNetScenePatches.ZNetSceneAwakePatch` to eliminate door queueing, component attachment, and tracking overhead on dedicated servers.
   * In `DoorStatus.cs`, added `SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null` bypass in `Start()` to prevent active polling on headless servers.
   * Wrapped `_trackedDoor.Interact` in defensive try/catch blocks with guarded logging, preventing third-party ward crashes (e.g. `LegacyWard` / `WackyWard`), resolving [DOOROPENERBRUH-2](https://vapok-gaming.sentry.io/issues/DOOROPENERBRUH-2).
   * Enforced explicit typing across `DoorStatus.cs`, eliminating lazy `var` declarations.
