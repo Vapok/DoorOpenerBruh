@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DoorOpenerBruh.Assets.Factories;
 using DoorOpenerBruh.Assets.Pieces;
 using UnityEngine;
@@ -34,6 +34,12 @@ public class DoorStatus : MonoBehaviour
 
     private void Start()
     {
+        if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null)
+        {
+            enabled = false;
+            return;
+        }
+
         _isGhost = _trackedDoor != null && _trackedDoor.gameObject.layer == Piece.s_ghostLayer;
             
         if (_isGhost)
@@ -82,9 +88,9 @@ public class DoorStatus : MonoBehaviour
 
         if (DoorFactory.DoorPieces != null)
         {
-            if (DoorFactory.DoorPieces.TryGetValue(_prefabCleanName ?? string.Empty, out var doorPiece))
+            if (DoorFactory.DoorPieces.TryGetValue(_prefabCleanName ?? string.Empty, out IDoorPiece doorPiece))
                 _doorPiece = doorPiece;
-            else if (DoorFactory.DoorPieces.TryGetValue("other", out var otherPiece))
+            else if (DoorFactory.DoorPieces.TryGetValue("other", out IDoorPiece otherPiece))
                 _doorPiece = otherPiece;
         }
 
@@ -93,18 +99,18 @@ public class DoorStatus : MonoBehaviour
 
     private float GetDistanceToPlayer(Player player)
     {
-        var playerPos = player.transform.position;
-        var minDistance = Vector3.Distance(_trackedDoor.transform.position, playerPos);
+        Vector3 playerPos = player.transform.position;
+        float minDistance = Vector3.Distance(_trackedDoor.transform.position, playerPos);
 
         if (_colliders != null && _colliders.Length > 0)
         {
             for (int i = 0; i < _colliders.Length; i++)
             {
-                var col = _colliders[i];
+                Collider col = _colliders[i];
                 if (col == null || !col.enabled || col.isTrigger) continue;
 
-                var closest = col.bounds.ClosestPoint(playerPos);
-                var dist = Vector3.Distance(closest, playerPos);
+                Vector3 closest = col.bounds.ClosestPoint(playerPos);
+                float dist = Vector3.Distance(closest, playerPos);
                 if (dist < minDistance)
                     minDistance = dist;
             }
@@ -116,7 +122,7 @@ public class DoorStatus : MonoBehaviour
     {
         if (DoorOpener.Instance == null) return;
 
-        var player = DoorOpener.Instance.Bruh;
+        Player player = DoorOpener.Instance.Bruh;
         if (player == null || player.IsDead() || _trackedDoor == null)
             return;
 
@@ -125,11 +131,11 @@ public class DoorStatus : MonoBehaviour
 
         _status = _trackedDoor.m_nview.GetZDO().GetInt(ZDOVars.s_state, 0);
 
-        var doorPiece = GetDoorPiece();
-        var openDist = doorPiece?.GetOpenDistance() ?? 3.0f;
-        var closeDist = doorPiece?.GetCloseDistance() ?? 4.5f;
+        IDoorPiece doorPiece = GetDoorPiece();
+        float openDist = doorPiece?.GetOpenDistance() ?? 3.0f;
+        float closeDist = doorPiece?.GetCloseDistance() ?? 4.5f;
 
-        var currentDist = GetDistanceToPlayer(player);
+        float currentDist = GetDistanceToPlayer(player);
 
         if (_inRange)
         {
@@ -149,7 +155,14 @@ public class DoorStatus : MonoBehaviour
             {
                 if (!_autoOpened)
                 {
-                    _trackedDoor.Interact(player, false, false);
+                    try
+                    {
+                        _trackedDoor.Interact(player, false, false);
+                    }
+                    catch (Exception ex)
+                    {
+                        DoorOpenerBruh.Log.Warning($"Exception during door interaction: {ex.Message}");
+                    }
                     _autoOpened = true;
                 }
             }

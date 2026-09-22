@@ -1,9 +1,14 @@
-# 2.0.7 - Valheim 1.0.15 Alignment & Internalized Dependency Updates
-* **Valheim 1.0.15 Alignment**: Updated game assembly references and internalized `Vapok.Valheim.Common` 3.13.1015.
-* **Localization & Stability**: Re-synchronized 35-language splash localizations and verified patch compatibility.
+# 2.0.8 - Door Interaction Safety & Dedicated Server Bypass
+* Fixed an issue where third-party mod wards could cause errors when doors open.
+* Disabled automated door checking on dedicated servers to save performance.
+* Updated internal libraries for better stability.
 
 <details>
 <summary><b>2.0 Changelog History (Valheim Release)</b> (<i>click to expand</i>)</summary>
+
+### 2.0.7 - Valheim 1.0.15 Alignment & Internalized Dependency Updates
+* **Valheim 1.0.15 Alignment**: Updated game assembly references and internalized `Vapok.Valheim.Common` 3.13.1015.
+* **Localization & Stability**: Re-synchronized 35-language splash localizations and verified patch compatibility.
 
 ### 2.0.6 - Splash Window Updates & Valheim 1.0.14 Alignment
 * **Splash Window Updates**:

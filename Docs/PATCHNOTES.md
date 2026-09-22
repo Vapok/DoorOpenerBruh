@@ -1,3 +1,12 @@
+# 2.0.8 - Door Interaction Safety & Dedicated Server Bypass
+* **Door Interaction & Dedicated Server Safeguards**:
+  * In `DoorStatus.cs`, added `SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null` bypass in `Start()` to prevent active polling on headless servers.
+  * Wrapped `_trackedDoor.Interact` in defensive try/catch blocks with guarded logging, preventing third-party ward crashes (e.g. `LegacyWard` / `WackyWard`), resolving [DOOROPENERBRUH-2](https://vapok-gaming.sentry.io/issues/DOOROPENERBRUH-2).
+  * Enforced explicit typing across `DoorStatus.cs`, eliminating lazy `var` declarations.
+* **Library Updates**:
+  * Synchronized `Vapok.Valheim.Common` to `3.17.1015`.
+  * Synchronized `JotunnLib` to `2.30.2`.
+
 # 2.0.7 - Valheim 1.0.15 Alignment & Internalized Dependency Updates
 * **Valheim 1.0.15 Alignment**:
   * Aligned publicized game assembly and UnityEngine references to Valheim 1.0.15.
