@@ -12,14 +12,14 @@ internal static class DoorPatches
     [HarmonyPatch(typeof(Door), nameof(Door.Awake))]
     internal static class DoorAwakePatch
     {
+        [HarmonyPrepare]
+        private static bool Prepare() => SystemInfo.graphicsDeviceType != UnityEngine.Rendering.GraphicsDeviceType.Null;
+
         internal static Queue<Door> Doors = new ();
         
         [UsedImplicitly]
         private static void Postfix(Door __instance)
         {
-            if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null)
-                return;
-
             if (DoorOpener.Instance != null)
                 __instance.gameObject.GetOrAddComponent<DoorStatus>();
             else
