@@ -2,7 +2,7 @@
 * **Expanded Door Support**: Added dedicated configuration settings for Wood Shutters, Wood Fence Gates, and Stave Gates.
 * **Dedicated Server Support**: Enabled full configuration loading on headless dedicated servers while bypassing client-only door checks.
 * **Door Interaction Safety**: Fixed an issue where third-party mod wards could cause errors when doors open.
-* **Dependency Updates**: Updated internal libraries for stability and configuration performance.
+* **Dependency Updates**: Updated Jotunn to 2.30.2 and internal dependencies for stability.
 
 <details>
 <summary><b>2.0 Changelog History (Valheim Release)</b> (<i>click to expand</i>)</summary>
