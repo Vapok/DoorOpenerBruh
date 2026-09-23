@@ -8,7 +8,7 @@
   * Wrapped `_trackedDoor.Interact` in defensive try/catch blocks with guarded logging, preventing third-party ward crashes (e.g. `LegacyWard` / `WackyWard`), resolving [DOOROPENERBRUH-2](https://vapok-gaming.sentry.io/issues/DOOROPENERBRUH-2).
   * Enforced explicit typing across `DoorStatus.cs`, eliminating lazy `var` declarations.
 * **Library Updates**:
-  * Synchronized `Vapok.Valheim.Common` to `3.17.1015`.
+  * Synchronized `Vapok.Valheim.Common` to `3.19.1015`.
   * Synchronized `JotunnLib` to `2.30.2`.
 
 # 2.0.7 - Valheim 1.0.15 Alignment & Internalized Dependency Updates
