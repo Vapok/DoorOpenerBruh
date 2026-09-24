@@ -1,4 +1,4 @@
-﻿using ItemManager;
+using ItemManager;
 using Vapok.Common.Managers.PieceManager;
 using CraftingTable = ItemManager.CraftingTable;
 
@@ -69,8 +69,8 @@ internal abstract class AssetItem : IAssetItem
 
     internal void ResetPrefabArmor()
     {
-        var itemDrop = GetItemDrop();
-        var itemData = itemDrop.m_itemData;
+        ItemDrop itemDrop = GetItemDrop();
+        ItemDrop.ItemData itemData = itemDrop.m_itemData;
         if (itemData != null)
         {
             itemDrop.m_autoPickup = true;

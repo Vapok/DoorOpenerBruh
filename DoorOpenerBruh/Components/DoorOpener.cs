@@ -1,4 +1,4 @@
-﻿using DoorOpenerBruh.Patches;
+using DoorOpenerBruh.Patches;
 using Jotunn;
 using UnityEngine;
 
@@ -31,7 +31,7 @@ public class DoorOpener : MonoBehaviour
         
         while (DoorPatches.DoorAwakePatch.Doors != null && DoorPatches.DoorAwakePatch.Doors.Count > 0)
         {
-            var door = DoorPatches.DoorAwakePatch.Doors.Dequeue();
+            Door door = DoorPatches.DoorAwakePatch.Doors.Dequeue();
             
             if (door == null) continue;
             

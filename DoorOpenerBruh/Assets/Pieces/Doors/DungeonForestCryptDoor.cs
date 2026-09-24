@@ -12,7 +12,7 @@ public class DungeonForestCryptDoor : DoorPiece
 
     public override bool DoorAutomationEnabled(DoorStatus trackedDoor)
     {
-        var enabled = ComputeAutomation(trackedDoor);
+        bool enabled = ComputeAutomation(trackedDoor);
 
         return enabled;
     }

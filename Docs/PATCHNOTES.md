@@ -6,9 +6,10 @@
   * Implemented fail-before-patching via `[HarmonyPrepare]` returning `!GUIManager.IsHeadless()` across all client-only patch classes (`DoorPatches`, `ZNetScenePatches`, `PlayerPatches`, `FejdStartupPatches`), ensuring Harmony never touches or hooks game methods on dedicated servers.
   * In `DoorStatus.cs`, added `GUIManager.IsHeadless()` bypass in `Start()` to prevent active polling on headless servers.
   * Wrapped `_trackedDoor.Interact` in defensive try/catch blocks with guarded logging, preventing third-party ward crashes (e.g. `LegacyWard` / `WackyWard`), resolving [DOOROPENERBRUH-2](https://vapok-gaming.sentry.io/issues/DOOROPENERBRUH-2).
-  * Enforced explicit typing across `DoorStatus.cs`, eliminating lazy `var` declarations.
+  * Upstream SafePatch hardening and headless bypass in `Vapok.Valheim.Common` resolves [DOOROPENERBRUH-3](https://vapok-gaming.sentry.io/issues/DOOROPENERBRUH-3).
+  * Enforced explicit typing across `DoorStatus.cs`, `DoorOpener.cs`, `AssetItem.cs`, and all door piece classes, eliminating lazy `var` declarations.
 * **Library Updates**:
-  * Synchronized `Vapok.Valheim.Common` to `3.19.1015`.
+  * Synchronized `Vapok.Valheim.Common` to `3.21.1015`.
   * Synchronized `JotunnLib` to `2.30.2`.
 
 # 2.0.7 - Valheim 1.0.15 Alignment & Internalized Dependency Updates
