@@ -27,6 +27,13 @@ public class DoorStatus : MonoBehaviour
 
     private void Awake()
     {
+        if (GUIManager.IsHeadless())
+        {
+            enabled = false;
+            Destroy(this);
+            return;
+        }
+
         _trackedDoor = gameObject.GetComponent<Door>();
         _piece = gameObject.GetComponent<Piece>();
         _prefabCleanName = global::Utils.GetPrefabName(gameObject);
@@ -38,6 +45,7 @@ public class DoorStatus : MonoBehaviour
         if (GUIManager.IsHeadless())
         {
             enabled = false;
+            Destroy(this);
             return;
         }
 
@@ -100,6 +108,9 @@ public class DoorStatus : MonoBehaviour
 
     private float GetDistanceToPlayer(Player player)
     {
+        if (_trackedDoor == null || player == null)
+            return float.MaxValue;
+
         Vector3 playerPos = player.transform.position;
         float minDistance = Vector3.Distance(_trackedDoor.transform.position, playerPos);
 
@@ -130,7 +141,11 @@ public class DoorStatus : MonoBehaviour
         if (_trackedDoor.m_nview == null || !_trackedDoor.m_nview.IsValid())
             return;
 
-        _status = _trackedDoor.m_nview.GetZDO().GetInt(ZDOVars.s_state, 0);
+        ZDO zdo = _trackedDoor.m_nview.GetZDO();
+        if (zdo == null)
+            return;
+
+        _status = zdo.GetInt(ZDOVars.s_state, 0);
 
         IDoorPiece doorPiece = GetDoorPiece();
         float openDist = doorPiece?.GetOpenDistance() ?? 3.0f;

@@ -1,11 +1,16 @@
-# 2.0.8 - Expanded Door Support, Dedicated Server Support & Stability
+# 2.0.9 - Dedicated Server & Door Detection Hardening
+* **Dedicated Server Safety**: Cleanly destroys client-only door components if spawned on headless dedicated servers.
+* **Door Interaction Safety**: Added safety checks for door instances and network objects during door status checks.
+* **Dependency Updates**: Updated internal dependencies for stability.
+
+<details>
+<summary><b>2.0 Changelog History (Valheim Release)</b> (<i>click to expand</i>)</summary>
+
+### 2.0.8 - Expanded Door Support, Dedicated Server Support & Stability
 * **Expanded Door Support**: Added dedicated configuration settings for Wood Shutters, Wood Fence Gates, and Stave Gates.
 * **Dedicated Server Support**: Enabled full configuration loading on headless dedicated servers while bypassing client-only door checks.
 * **Door Interaction Safety**: Fixed an issue where third-party mod wards could cause errors when doors open.
 * **Dependency Updates**: Updated Jotunn to 2.30.2 and internal dependencies for stability.
-
-<details>
-<summary><b>2.0 Changelog History (Valheim Release)</b> (<i>click to expand</i>)</summary>
 
 ### 2.0.7 - Valheim 1.0.15 Alignment & Internalized Dependency Updates
 * **Valheim 1.0.15 Alignment**: Updated game assembly references and internalized `Vapok.Valheim.Common` 3.13.1015.

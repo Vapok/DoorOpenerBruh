@@ -1,3 +1,8 @@
+# 2.0.9 - Dedicated Server & Door Detection Hardening
+* **DoorStatus Headless Destruction & Null Checks (`DoorStatus.cs`)**:
+  * In `DoorStatus.Awake`, added `if (GUIManager.IsHeadless()) { Destroy(this); return; }` to ensure client tracking components do not run on headless dedicated servers.
+  * In `DoorStatus.IsDoorClosed`, added explicit null verification for `_trackedDoor` and `_trackedDoor.GetZDO()` before querying state properties, eliminating unhandled `NullReferenceException` on destroyed or invalid door instances (resolves Sentry issue [DOOROPENERBRUH-4](https://vapok-gaming.sentry.io/issues/DOOROPENERBRUH-4)).
+
 # 2.0.8 - Expanded Door Support, Dedicated Server Support & Stability
 * **Expanded Door Piece Classes**:
   * Added dedicated classes and configuration sections for buildable pieces using the vanilla `Door` component: `WindowShutter.cs` (`Buildable: Wood Shutter`), `WoodFenceGate.cs` (`Buildable: Wood Fence Gate`), and `StaveGate.cs` (`Buildable: Stave Gate`).
