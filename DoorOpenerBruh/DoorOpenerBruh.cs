@@ -80,7 +80,6 @@ namespace DoorOpenerBruh
             {
                 Tagline = "Automatic door and gate opening and closing mechanics with configurable proximity.",
                 ShowOnStartup = ConfigRegistry.ShowSplashOnStartup,
-                EnableTelemetry = ConfigRegistry.EnableTelemetry,
             });
 
             if (GUIManager.IsHeadless())
