@@ -6,8 +6,8 @@ namespace DoorOpenerBruh.Patches;
 internal static class FejdStartupPatches
 {
     [HarmonyPatch(typeof(FejdStartup), nameof(FejdStartup.Awake))]
-    [HarmonyAfter("org.bepinex.helpers.LocalizationManager")]
-    [HarmonyBefore("org.bepinex.helpers.ItemManager")]
+    [HarmonyAfter("vapok.common.LocalizationManager", "org.bepinex.helpers.LocalizationManager")]
+    [HarmonyBefore("vapok.common.ItemManager", "org.bepinex.helpers.ItemManager")]
     internal static class FejdStartupAwakePatch
     {
         [HarmonyPrepare]
