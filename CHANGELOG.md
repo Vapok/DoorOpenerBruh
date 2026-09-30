@@ -1,10 +1,13 @@
-# 2.0.9 - Dedicated Server & Door Detection Hardening
-* **Dedicated Server Safety**: Cleanly destroys client-only door components if spawned on headless dedicated servers.
-* **Door Interaction Safety**: Added safety checks for door instances and network objects during door status checks.
-* **Dependency Updates**: Updated internal dependencies for stability.
+# 2.0.10 - Compatibility Stability
+* **Compatibility Stability**: Updated dependencies for third party mod compatibilities.
 
 <details>
 <summary><b>2.0 Changelog History (Valheim Release)</b> (<i>click to expand</i>)</summary>
+
+### 2.0.9 - Dedicated Server & Door Detection Hardening
+* **Dedicated Server Safety**: Cleanly destroys client-only door components if spawned on headless dedicated servers.
+* **Door Interaction Safety**: Added safety checks for door instances and network objects during door status checks.
+* **Dependency Updates**: Updated internal dependencies for stability.
 
 ### 2.0.8 - Expanded Door Support, Dedicated Server Support & Stability
 * **Expanded Door Support**: Added dedicated configuration settings for Wood Shutters, Wood Fence Gates, and Stave Gates.

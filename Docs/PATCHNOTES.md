@@ -1,3 +1,6 @@
+# 2.0.10 - Compatibility Stability
+* **Compatibility Stability**: Updated dependencies for third party mod compatibilities.
+
 # 2.0.9 - Dedicated Server & Door Detection Hardening
 * **DoorStatus Headless Destruction & Null Checks (`DoorStatus.cs`)**:
   * In `DoorStatus.Awake`, added `if (GUIManager.IsHeadless()) { Destroy(this); return; }` to ensure client tracking components do not run on headless dedicated servers.
