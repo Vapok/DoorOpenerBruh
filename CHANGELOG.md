@@ -1,8 +1,12 @@
-# 2.0.10 - Compatibility Stability
-* **Compatibility Stability**: Updated dependencies for third party mod compatibilities.
+# 2.0.11 - Dependency Updates & Stability
+* Updated internal dependencies for stability.
 
 <details>
 <summary><b>2.0 Changelog History (Valheim Release)</b> (<i>click to expand</i>)</summary>
+
+
+### 2.0.10 - Compatibility Stability
+* **Compatibility Stability**: Updated dependencies for third party mod compatibilities.
 
 ### 2.0.9 - Dedicated Server & Door Detection Hardening
 * **Dedicated Server Safety**: Cleanly destroys client-only door components if spawned on headless dedicated servers.
