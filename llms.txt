@@ -1,0 +1,14 @@
+# DoorOpenerBruh
+
+> DoorOpenerBruh is an automatic proximity-based door and gate opener and closer for valheim. developed by Vapok.
+
+## Developer & AI Information
+
+- [Agent Guidelines](AGENTS.md): Architectural context, anti-reflection mandates, and instructions for AI assistants.
+
+## Critical Invariants for Developers & AI Agents
+
+- **Proximity detection and door animation triggering**: Proximity detection and door animation triggering.
+- **Never use reflection or Harmony patches on internal door watchers**: Never use reflection or Harmony patches on internal door watchers.
+- **No Private Reflection**: Never reflect into or patch internal classes.
+- **Feature Requests**: If functionality is desired, submit an issue at https://github.com/Vapok/DoorOpenerBruh/issues or visit https://discord.gg/5YAJkRFBXt.
