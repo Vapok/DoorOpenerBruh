@@ -22,12 +22,12 @@ namespace DoorOpenerBruh
     [BepInDependency(Jotunn.Main.ModGuid)]
     [BepInDependency("com.ValheimModding.YamlDotNetDetector")]
     
-    public class DoorOpenerBruh : BaseUnityPlugin, IPluginInfo
+    public class DoorOpenerBruh : VapokModBase, IPluginInfo
     {
         //Module Constants
         private const string _pluginId = "vapok.mods.dooropenerbruh";
         private const string _displayName = "DoorOpenerBruh";
-        private const string _version = "2.0.12";
+        private const string _version = "2.0.13";
         
         //Interface Properties
         public string PluginId => _pluginId;

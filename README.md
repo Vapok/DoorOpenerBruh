@@ -119,6 +119,24 @@ Fine-tune global toggles and per-door behavior in the in-game [BepInEx Configura
 * ⚠️ **Integration Policy**: DoorOpenerBruh is a self-contained mod without a public API. Do not use reflection or Harmony patches on internal classes.
 * 💡 **Feature Requests**: If you need integration hooks or functionality, open a [Feature Request](https://github.com/Vapok/DoorOpenerBruh/issues) or reach out in our [Discord](https://discord.gg/5YAJkRFBXt).
 
+---
+
+## 🤖 AI Disclosure & Transparency Audit
+
+In accordance with mod store's various AI policies, below is the full transparency breakdown for **DoorOpenerBruh**:
+
+* **Audit Status**: `AI ASSISTED`
+* **Weighted LLM Score**: `18.9%`
+
+| Category | Evaluated Surface | LLM Score | Status |
+| :--- | :--- | :--- | :--- |
+| **C# Assembly & Logic** | Decompiled C# source (122 files) | `9.7%` | C# codebase is predominantly authentic human authoring with lightweight LLM-assisted boilerplate identified in 2 of 10 substantive author files (9.7% of total lines). |
+| **Package Manifest & Structure** | Manifest, structure & icon (v2.0.13) | `0.0%` | Manifest and package structure are clean and human-authored, and the storefront icon is an authentic desktop image-editor brand logo containing snagit/editor metadata chunks. |
+| **Documentation & Copywriting** | Package documentation (7697 chars) | `75.0%` | README features highly polished LLM-assisted copywriting with structured Markdown tables, centered badge layouts, and standardized feature breakdown formatting. |
+| **Visual & Audio Media** | In-package Unity & media assets | `0.0%` | Package contains zero in-mod UnityFS AssetBundles, zero embedded PNG/audio resources, and zero procedural asset generation. |
+
+---
+
 ## 🔒 Anonymous Telemetry, Error Reporting & Privacy
 
 DoorOpenerBruh includes lightweight, privacy-first telemetry and error reporting to help monitor mod stability, diagnose unhandled bugs, and track active version adoption across game updates.

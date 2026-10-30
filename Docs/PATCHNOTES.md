@@ -1,3 +1,10 @@
+# 2.0.13 - Valheim 1.0.21 Update & Config Save Fix
+* **Configuration Save Batching (`DOOROPENERBRUH-6`)**:
+  * Updated internalized `Vapok.Valheim.Common` to 3.1021.2 to batch initial `ConfigSyncBase` bindings into a single guarded `Save()` call.
+* **Dependency & Engine Alignment**:
+  * Inherited `VapokModBase` to declare `[BepInIncompatibility("IAmOnTheInternetAndItIsScary.NoPopUpsInMyValheim")]`.
+  * Aligned game assembly references to Valheim 1.0.21 and BepInEx 5.4.2360.
+
 # 2.0.12 - Dependency Updates & Valheim 1.0.20 Alignment
 * **Dependency & Engine Alignment**:
   * Updated internalized dependency `Vapok.Valheim.Common` to 3.1020.1.
