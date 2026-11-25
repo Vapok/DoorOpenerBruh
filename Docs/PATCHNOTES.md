@@ -1,3 +1,8 @@
+# 2.0.14 - Valheim 1.0.30 Update & Dependency Alignment
+* **Dependency & Engine Alignment**:
+  * Updated internalized dependency `Vapok.Valheim.Common` to 3.1030.1.
+  * Aligned game assembly references to Valheim 1.0.30.
+
 # 2.0.13 - Valheim 1.0.21 Update & Config Save Fix
 * **Configuration Save Batching (`DOOROPENERBRUH-6`)**:
   * Updated internalized `Vapok.Valheim.Common` to 3.1021.2 to batch initial `ConfigSyncBase` bindings into a single guarded `Save()` call.
